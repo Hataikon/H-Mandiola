@@ -1,0 +1,54 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="H_Mandiola_Backend.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>"H-Mandiola"</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="Content/bootstrap-grid.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery-3.0.0.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9">
+                    <img class="img-fluid" src="hotel_header.jpg" alt="backend_header"/>
+                </div>
+                <div class="col-md">
+                    <div class ="row">
+                        <asp:Label ID="bienvenidoLabel" runat="server" Text="Bienvenido"></asp:Label>
+                    </div>
+                    <div class ="row">
+                        <asp:LoginName ID="LoginName1" runat="server"/>
+                    </div>
+                    <div class ="row">
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <asp:Label ID="SiteMapLPathLabel" runat="server" Text="Usted esta en:"></asp:Label>
+                    <asp:SiteMapPath ID="SiteMapPath1" SiteMapProvider="web" runat="server"></asp:SiteMapPath>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <asp:TreeView ID="TreeView1" runat="server" DataSourceID="backendDataSource">
+                    </asp:TreeView>
+                </div>
+                <div class="col-md-6">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <asp:SiteMapDataSource ID="backendDataSource" SiteMapProvider="web" runat="server" />
+    </form>
+</body>
+</html>
