@@ -69,13 +69,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="actividades.aspx" />
+    <Content Include="activos.aspx" />
+    <Content Include="bitacora.aspx" />
+    <Content Include="cambiar_contrasena.aspx" />
+    <Content Include="clientes_activos.aspx" />
+    <Content Include="consecutivos.aspx" />
+    <Content Include="consulta_errores.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="crear_usuario.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="detalle_usuarios.aspx" />
+    <Content Include="error.aspx" />
+    <Content Include="estado_cliente.aspx" />
+    <Content Include="habitaciones.aspx" />
+    <Content Include="habitaciones_listas.aspx" />
+    <Content Include="lista_de_actividades.aspx" />
+    <Content Include="lista_de_activos.aspx" />
+    <Content Include="lista_de_consecutivos.aspx" />
+    <Content Include="lista_de_habitaciones.aspx" />
+    <Content Include="lista_de_precios.aspx" />
+    <Content Include="lista_estado_cliente.aspx" />
     <Content Include="login.aspx" />
+    <Content Include="precios.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -117,6 +138,146 @@
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actividades.aspx.cs">
+      <DependentUpon>actividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="actividades.aspx.designer.cs">
+      <DependentUpon>actividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="activos.aspx.cs">
+      <DependentUpon>activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="activos.aspx.designer.cs">
+      <DependentUpon>activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bitacora.aspx.cs">
+      <DependentUpon>bitacora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bitacora.aspx.designer.cs">
+      <DependentUpon>bitacora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="cambiar_contrasena.aspx.cs">
+      <DependentUpon>cambiar_contrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="cambiar_contrasena.aspx.designer.cs">
+      <DependentUpon>cambiar_contrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="clientes_activos.aspx.cs">
+      <DependentUpon>clientes_activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="clientes_activos.aspx.designer.cs">
+      <DependentUpon>clientes_activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="consecutivos.aspx.cs">
+      <DependentUpon>consecutivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="consecutivos.aspx.designer.cs">
+      <DependentUpon>consecutivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="consulta_errores.aspx.cs">
+      <DependentUpon>consulta_errores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="consulta_errores.aspx.designer.cs">
+      <DependentUpon>consulta_errores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="crear_usuario.aspx.cs">
+      <DependentUpon>crear_usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="crear_usuario.aspx.designer.cs">
+      <DependentUpon>crear_usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="detalle_usuarios.aspx.cs">
+      <DependentUpon>detalle_usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="detalle_usuarios.aspx.designer.cs">
+      <DependentUpon>detalle_usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="estado_cliente.aspx.cs">
+      <DependentUpon>estado_cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="estado_cliente.aspx.designer.cs">
+      <DependentUpon>estado_cliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="habitaciones.aspx.cs">
+      <DependentUpon>habitaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="habitaciones.aspx.designer.cs">
+      <DependentUpon>habitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="habitaciones_listas.aspx.cs">
+      <DependentUpon>habitaciones_listas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="habitaciones_listas.aspx.designer.cs">
+      <DependentUpon>habitaciones_listas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_de_actividades.aspx.cs">
+      <DependentUpon>lista_de_actividades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_de_actividades.aspx.designer.cs">
+      <DependentUpon>lista_de_actividades.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_de_activos.aspx.cs">
+      <DependentUpon>lista_de_activos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_de_activos.aspx.designer.cs">
+      <DependentUpon>lista_de_activos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_de_consecutivos.aspx.cs">
+      <DependentUpon>lista_de_consecutivos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_de_consecutivos.aspx.designer.cs">
+      <DependentUpon>lista_de_consecutivos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_de_habitaciones.aspx.cs">
+      <DependentUpon>lista_de_habitaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_de_habitaciones.aspx.designer.cs">
+      <DependentUpon>lista_de_habitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_de_precios.aspx.cs">
+      <DependentUpon>lista_de_precios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_de_precios.aspx.designer.cs">
+      <DependentUpon>lista_de_precios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_estado_cliente.aspx.cs">
+      <DependentUpon>lista_estado_cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lista_estado_cliente.aspx.designer.cs">
+      <DependentUpon>lista_estado_cliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -130,6 +291,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="precios.aspx.cs">
+      <DependentUpon>precios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="precios.aspx.designer.cs">
+      <DependentUpon>precios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebForm1.aspx.cs">
