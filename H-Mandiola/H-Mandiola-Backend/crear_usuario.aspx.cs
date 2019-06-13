@@ -13,5 +13,9 @@ namespace H_Mandiola_Backend
         {
 
         }
+
+        protected void CreateUserWizard_CreatedUser(object sender, EventArgs e)
+        {
+        }
     }
 }

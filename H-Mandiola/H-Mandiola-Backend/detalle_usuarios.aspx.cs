@@ -13,5 +13,13 @@ namespace H_Mandiola_Backend
         {
 
         }
+
+        protected void userList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        protected void ActualizaRoles_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

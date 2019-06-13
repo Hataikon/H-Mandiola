@@ -13,5 +13,23 @@ namespace H_Mandiola_Backend
         {
 
         }
+        protected void cerrarButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("lista_de_actividades.aspx");
+        }
+
+        protected void borrarButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("actividades.aspx?codigo=0");
+        }
+
+        protected void aceptarButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void ConsecutivoList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            codigoBox.Text = ConsecutivoList.SelectedValue.ToString();
+        }
     }
 }
