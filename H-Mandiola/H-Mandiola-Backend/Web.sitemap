@@ -20,7 +20,7 @@
       <siteMapNode url="bitacora.aspx" title="Bitacora"  description="" />
       <siteMapNode url="consulta_errores.aspx" title="Errores"  description="" />
       <siteMapNode url="clientes_activos.aspx" title="Clientes Activos"  description="" />
-      <siteMapNode url="habitaciones_listas.aspx" title="Habitaciones Listas(Como Puertas Activas en V Vuelos)"  description="" />
+      <siteMapNode url="habitaciones_listas.aspx" title="Habitaciones Listas"  description="" />
     </siteMapNode>
   </siteMapNode>
 </siteMap>

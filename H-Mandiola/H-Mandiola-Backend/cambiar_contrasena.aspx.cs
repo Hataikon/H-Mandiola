@@ -13,5 +13,9 @@ namespace H_Mandiola_Backend
         {
 
         }
+
+        protected void cambiarContrasena_ChangedPassword(object sender, EventArgs e)
+        {
+        }
     }
 }

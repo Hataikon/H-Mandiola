@@ -13,5 +13,30 @@ namespace H_Mandiola_Backend
         {
 
         }
+
+        protected void bitacoraGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+        }
+
+        protected void bitacoraGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        protected void listAccion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        protected void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        protected void textBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        protected void personaTextbox_TextChanged(object sender, EventArgs e)
+        {
+        }
+
     }
 }

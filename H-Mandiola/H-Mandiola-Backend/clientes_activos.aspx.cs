@@ -13,5 +13,9 @@ namespace H_Mandiola_Backend
         {
 
         }
+
+        protected void filtrarButton_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
