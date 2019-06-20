@@ -14,7 +14,7 @@
       <siteMapNode url="lista_de_activos.aspx" title="Activos"  description="" />
       <siteMapNode url="lista_de_habitaciones.aspx" title="Habitaciones"  description="" />
       <siteMapNode url="lista_de_precios.aspx" title="Precios"  description="" />
-      <siteMapNode url="estado_cliente.aspx" title="Estado de los Clientes"  description="" />
+      <siteMapNode url="lista_estado_cliente.aspx" title="Estado de los Clientes"  description="" />
     </siteMapNode>
     <siteMapNode url="" title="Consultas"  description="Opciones de administracion">
       <siteMapNode url="bitacora.aspx" title="Bitacora"  description="" />

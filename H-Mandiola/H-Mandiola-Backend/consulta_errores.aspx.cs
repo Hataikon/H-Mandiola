@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,21 @@ namespace H_Mandiola_Backend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            DataRow dr = null;
+            dt.Columns.Add(new DataColumn("Codigo", typeof(string)));
+            dt.Columns.Add(new DataColumn("Numero", typeof(string)));
+            dt.Columns.Add(new DataColumn("Hora", typeof(string)));
+            dt.Columns.Add(new DataColumn("Mensaje", typeof(string)));
+            dr = dt.NewRow();
+            dr["Codigo"] = "ERR-4";
+            dr["Numero"] = "504";
+            dr["Hora"] = "2019/05/21 22:00:00";
+            dr["Mensaje"] = "Site not found";
+            dt.Rows.Add(dr);
+
+            errorGridView.DataSource = dt;
+            errorGridView.DataBind();
 
         }
 

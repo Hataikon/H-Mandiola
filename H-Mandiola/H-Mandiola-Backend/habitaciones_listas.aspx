@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="row">
-        <asp:GridView ID="listaDePuertasGrid" runat="server" AutoGenerateColumns="false">
+        <asp:GridView ID="habitacionesListasGrid" runat="server" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField DataField="CODIGO" HeaderText="Codigo" />
                 <asp:BoundField DataField="NUMERO" HeaderText="Numero" />

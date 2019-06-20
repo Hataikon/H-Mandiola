@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,6 +12,19 @@ namespace H_Mandiola_Backend
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            DataRow dr = null;
+            dt.Columns.Add(new DataColumn("CODIGO", typeof(string)));
+            dt.Columns.Add(new DataColumn("Fecha y Hora", typeof(string)));
+            dt.Columns.Add(new DataColumn("Descripcion", typeof(string)));
+            dr = dt.NewRow();
+            dr["CODIGO"] = "AC-101";
+            dr["Fecha y Hora"] = "2019/05/21 22:00:00";
+            dr["Descripcion"] = "Cambio a la actividad de Hiking";
+            dt.Rows.Add(dr);
+
+            bitacoraGridView.DataSource = dt;
+            bitacoraGridView.DataBind();
 
         }
 

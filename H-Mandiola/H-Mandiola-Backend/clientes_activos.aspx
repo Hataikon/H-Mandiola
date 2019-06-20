@@ -17,11 +17,11 @@
         </div>
     </div>
     <div class="row">
-        <asp:GridView ID="listaDePuertasGrid" runat="server" AutoGenerateColumns="false">
+        <asp:GridView ID="clientesActivosGrid" runat="server" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField DataField="CODIGO" HeaderText="Codigo" />
-                <asp:BoundField DataField="NOMBRE" HeaderText="Numero" />
-                <asp:BoundField DataField="HABITACION" HeaderText="Detalle" />
+                <asp:BoundField DataField="USUARIO" HeaderText="Codigo" />
+                <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
+                <asp:BoundField DataField="HABITACION" HeaderText="Habitacion" />
             </Columns>
         </asp:GridView>
     </div>
