@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registro</title>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="/css/StyleSheet1.css" />
+    <link rel="stylesheet" type="text/css" href="/css/StyleSheet1.css" />
 
     <!--inicio del css para el captcha-->
     <style>
@@ -51,9 +53,12 @@
 </head>
 
 <body>
-    <h1>
-        <a href="Home.html">Hotel Mandiola</a>
-    </h1>
+    <ul>
+        <li><a href="Home.html">Inicio</a></li>
+        <li><a>Contacto</a></li>
+        <li><a>Nosotros</a></li>
+        <li style="float:right"><a class="active" href="Login.html">Iniciar sesion</a></li>
+    </ul>
     <form class="form-horizontal" onsubmit="return checkform(this);">
         <!--<fieldset>-->
         <!-- Form Name -->
@@ -160,7 +165,7 @@
 
     <script type="text/javascript">
 
-        // Captcha Script
+        //Captcha Script
 
         function checkform(theform) {
             var why = "";
@@ -189,7 +194,7 @@
         document.getElementById("txtCaptcha").value = code;
         document.getElementById("CaptchaDiv").innerHTML = code;
 
-        // Validate input against the generated number
+        // Valida el numero
         function ValidCaptcha() {
             var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
             var str2 = removeSpaces(document.getElementById('CaptchaInput').value);

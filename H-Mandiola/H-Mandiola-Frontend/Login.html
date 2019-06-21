@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio de sesión</title>
+    <link rel="stylesheet" type="text/css" href="/css/StyleSheet1.css" />
 
     <!--inicio del css para el captcha-->
     <style>
@@ -51,11 +52,11 @@
 </head>
 
 <body>
-
-    <h1>
-        <a href="Home.html">Hotel Mandiola</a>
-    </h1>
-
+    <ul>
+        <li><a href="Home.html">Inicio</a></li>
+        <li><a>Contacto</a></li>
+        <li><a>Nosotros</a></li>
+    </ul>
     <form class="form-horizontal" onsubmit="return checkform(this);">
 
         <!-- Form Name -->
@@ -105,6 +106,7 @@
             <label class="col-md-4 control-label" for="inicioSesion"></label>
             <div class="col-md-4">
                 <button id="inicioSesion" name="inicioSesion" class="btn btn-primary">Iniciar sesión</button>
+                
             </div>
         </div>
     </form>

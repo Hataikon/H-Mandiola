@@ -69,7 +69,9 @@
   <ItemGroup>
     <Content Include="Ajustes_Cuenta.html" />
     <Content Include="Compra_Articulos.html" />
+    <Content Include="css\StyleSheet1.css" />
     <Content Include="Home.html" />
+    <Content Include="js\JavaScript.js" />
     <Content Include="Lobby.html" />
     <Content Include="Login.html" />
     <Content Include="Registro.html" />
