@@ -67,9 +67,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ajustes_Cuenta.html" />
+    <Content Include="Compra_Articulos.html" />
     <Content Include="Home.html" />
+    <Content Include="Lobby.html" />
     <Content Include="Login.html" />
     <Content Include="Registro.html" />
+    <Content Include="Reservaciones_Pagadas.html" />
+    <Content Include="Reservacion_Npagadas.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
