@@ -52,6 +52,20 @@
 </head>
 
 <body>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '325295755065651',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.3'
+            });
+        };
+    </script>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
     <ul>
         <li><a href="Home.html">Inicio</a></li>
         <li><a>Contacto</a></li>
@@ -69,7 +83,7 @@
             <label class="col-md-4 control-label" for="userID">Nombre de usuario:</label>
             <div class="col-md-4">
                 <input id="userID" name="userID" type="text" placeholder="Digite su usuario"
-                       class="form-control input-md">
+                    class="form-control input-md">
 
             </div>
         </div>
@@ -79,7 +93,7 @@
             <label class="col-md-4 control-label" for="passw">Contraseña:</label>
             <div class="col-md-4">
                 <input id="passw" name="passw" type="password" placeholder="Digite su contraseña"
-                       class="form-control input-md">
+                    class="form-control input-md">
 
             </div>
         </div>
@@ -106,7 +120,7 @@
             <label class="col-md-4 control-label" for="inicioSesion"></label>
             <div class="col-md-4">
                 <button id="inicioSesion" name="inicioSesion" class="btn btn-primary">Iniciar sesión</button>
-                
+
             </div>
         </div>
     </form>
@@ -159,6 +173,8 @@
             return string.split(' ').join('');
         }
     </script>
+    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
+        data-auto-logout-link="false" data-use-continue-as="false"></div>
 </body>
 
 </html>
