@@ -1,10 +1,104 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Reservation</title>
+    <link rel="stylesheet" href="css/navbar.css">
 </head>
-<body>
 
+<body>
+    <ul>
+        <li><a class="active" href="Reservaciones_Pagadas.html">Haga su Reservacion aqui</a></li>
+        <li><a href="Reservacion_Npagadas.html">Reserve y pague despues aqui</a></li>
+        <li><a href="Compra_Articulos.html">Compras adicionales</a></li>
+        <li><a href="Ajustes_Cuenta.html">Ajustes de Ajustes_Cuenta</a></li>
+        <li><a href="Home.html">Cerrar Sesion</a></li>
+    </ul>
+    <form class="form-horizontal">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend>Reservaciones No Pagas</legend>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="itinerario">Itinerario</label>
+                <div class="col-md-4">
+                    <select id="itinerario" name="itinerario" class="form-control">
+                        <option value="1">Option one</option>
+                        <option value="2">Option two</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cantDias">Cantidad de Dias</label>
+                <div class="col-md-4">
+                    <input id="cantDias" name="cantDias" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="tipoHabitacion">Tipo de Habitacion</label>
+                <div class="col-md-4">
+                    <select id="tipoHabitacion" name="tipoHabitacion" class="form-control">
+                        <option value="1">Normal</option>
+                        <option value="2">Deluxe</option>
+                        <option value="3">Condominio</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cantHabitaciones">Cantidad de Habitaciones</label>
+                <div class="col-md-4">
+                    <input id="cantHabitaciones" name="cantHabitaciones" type="text" placeholder=""
+                        class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cantPersonas">Cantidad de Personas</label>
+                <div class="col-md-4">
+                    <input id="cantPersonas" name="cantPersonas" type="text" placeholder=""
+                        class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="promoCode">Codigo de Promocion</label>
+                <div class="col-md-4">
+                    <input id="promoCode" name="promoCode" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Multiple Radios (inline) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="radioPago">Metodos de Pago</label>
+                <div class="col-md-4">
+                    <label class="radio-inline" for="radioPago-0">
+                        <input type="radio" name="radioPago" id="radioPago-0" value="1" checked="checked">
+                        Tarjeta
+                    </label>
+                    <label class="radio-inline" for="radioPago-1">
+                        <input type="radio" name="radioPago" id="radioPago-1" value="2">
+                        Easy Pay
+                    </label>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
 </body>
+
 </html>
