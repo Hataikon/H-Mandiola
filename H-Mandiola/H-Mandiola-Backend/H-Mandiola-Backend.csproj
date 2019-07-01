@@ -131,9 +131,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="actividades.html" />
+    <Content Include="activos.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="cambiar_contrasena.html" />
+    <Content Include="consecutivos.html" />
+    <Content Include="consulta_bitacora.html" />
+    <Content Include="consulta_clientes_activos.html" />
+    <Content Include="consulta_errores.html" />
+    <Content Include="consulta_habitaciones_listas.html" />
     <Content Include="Content\Site.css" />
+    <Content Include="crear_usuario.html" />
+    <Content Include="css\login.css" />
+    <Content Include="css\simple-sidebar.css" />
+    <Content Include="default.html" />
+    <Content Include="estado_cliente.html" />
     <Content Include="favicon.ico" />
+    <Content Include="habitaciones.html" />
+    <Content Include="lista_actividades.html" />
+    <Content Include="lista_activos.html" />
+    <Content Include="lista_consecutivos.html" />
+    <Content Include="lista_estado_cliente.html" />
+    <Content Include="lista_habitaciones.html" />
+    <Content Include="lista_precios.html" />
+    <Content Include="lista_usuarios.html" />
+    <Content Include="login.html" />
+    <Content Include="Media\Imagenes\placeholder.png" />
     <Content Include="Old ASPX Stuff\actividades.aspx" />
     <Content Include="Old ASPX Stuff\activos.aspx" />
     <Content Include="Old ASPX Stuff\bitacora.aspx" />
@@ -163,6 +186,7 @@
     <Content Include="Old ASPX Stuff\lista_estado_cliente.aspx" />
     <Content Include="Old ASPX Stuff\login.aspx" />
     <Content Include="Old ASPX Stuff\precios.aspx" />
+    <Content Include="precios.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -233,6 +257,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="SideBar.html" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="Scripts\popper-utils.js" />
@@ -279,7 +304,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Consecutivos.cs" />
+    <Compile Include="Clases\Consecutivos.cs" />
     <Compile Include="Controllers\ConsecutivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Old ASPX Stuff\actividades.aspx.cs">
@@ -507,6 +532,7 @@
       <Name>BLL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
