@@ -82,6 +82,21 @@ alter table COMPRAS
    drop constraint FK_COMPRAS_PRECIO
 go
 
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('USUARIOS_EN_ROLES') and o.name = 'FK_USUARIOS_EN_ROLES_USUARIO')
+alter table COMPRAS
+   drop constraint FK_USUARIOS_EN_ROLES_USUARIO
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('USUARIOS_EN_ROLES') and o.name = 'FK_USUARIOS_EN_ROLES_ROL')
+alter table COMPRAS
+   drop constraint FK_USUARIOS_EN_ROLES_ROL
+go
+
+
 /*==============================================================*/
 /* DROPS DE TABLAS                                              */
 /*                                                              */
@@ -154,6 +169,27 @@ if exists (select 1
            where  id = object_id('BITACORA')
             and   type = 'U')
    drop table BITACORA
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('USUARIOS')
+            and   type = 'U')
+   drop table USUARIOS
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('ROLES')
+            and   type = 'U')
+   drop table ROLES
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('USUARIOS_EN_ROLES')
+            and   type = 'U')
+   drop table USUARIOS_EN_ROLES
 go
 /*==============================================================*/
 /*                         CREATE                               */
@@ -270,18 +306,12 @@ GO
 ------------------------------------------------------------------------------
 
 CREATE TABLE CLIENTES (
-   ID NVARCHAR(10) COLLATE Latin1_General_BIN2 
-   ENCRYPTED WITH (
-	COLUMN_ENCRYPTION_KEY = CEK1,
-	ENCRYPTION_TYPE = Deterministic,
-	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   ) PRIMARY KEY,
    NOMBRE_USUARIO varchar(20) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   ) NOT NULL UNIQUE,
+   ) NOT NULL PRIMARY KEY,
    PASSWORD varchar(12) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
@@ -404,7 +434,7 @@ CREATE TABLE RESERVACIONES_DE_HABITACIONES (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    ),
-   ID_Cliente NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   Cliente VARCHAR(20) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -446,7 +476,7 @@ CREATE TABLE RESERVACIONES_DE_HABITACIONES (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-   CONSTRAINT FK_RESERVACIONES_CLIENTE FOREIGN KEY (ID_Cliente) REFERENCES CLIENTES(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT FK_RESERVACIONES_CLIENTE FOREIGN KEY (Cliente) REFERENCES CLIENTES(NOMBRE_USUARIO) ON DELETE CASCADE ON UPDATE CASCADE,
    CONSTRAINT FK_RESERVACIONES_HABITACION FOREIGN KEY (CODIGO_DE_HABITACION) REFERENCES HABITACIONES(CODIGO_CONSECUTIVO),
    CONSTRAINT FK_RESERVACIONES_PRECIO FOREIGN KEY (CODIGO_DE_PRECIO) REFERENCES PRECIOS(CODIGO_CONSECUTIVO)
 )
@@ -463,7 +493,7 @@ go
 ------------------------------------------------------------------------------
 
 CREATE TABLE COMPRAS (
-   ID_Cliente NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   Cliente VARCHAR(20) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -493,7 +523,7 @@ CREATE TABLE COMPRAS (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-   CONSTRAINT FK_COMPRAS_CLIENTE FOREIGN KEY (ID_Cliente) REFERENCES CLIENTES(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT FK_COMPRAS_CLIENTE FOREIGN KEY (Cliente) REFERENCES CLIENTES(NOMBRE_USUARIO) ON DELETE CASCADE ON UPDATE CASCADE,
    CONSTRAINT FK_COMPRAS_ACTIVO FOREIGN KEY (CODIGO_DE_ACTIVO) REFERENCES ACTIVOS(CODIGO_CONSECUTIVO),
    CONSTRAINT FK_COMPRAS_PRECIO FOREIGN KEY (CODIGO_DE_PRECIO) REFERENCES PRECIOS(CODIGO_CONSECUTIVO)
 )
@@ -568,3 +598,79 @@ create table BITACORA (
    )not null,
 )
 GO
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+CREATE TABLE USUARIOS (
+   NOMBRE_USUARIO VARCHAR(20) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ) NOT NULL PRIMARY KEY,
+   PASSWORD varchar(12) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   )not null,
+      EMAIL varchar(60) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   )not null,
+   PREGUNTA varchar(MAX) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   )not null,
+   RESPUESTA varchar(MAX) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   )not null
+)
+GO
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+create table ROLES (
+   ROL varchar(20) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ) NOT NULL PRIMARY KEY
+)
+go
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+create table USUARIOS_EN_ROLES (
+	USUARIO varchar(20) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+	ROL varchar(20) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+	constraint FK_USUARIOS_EN_ROLES_USUARIO foreign key (USUARIO)
+	references USUARIOS (NOMBRE_USUARIO),
+	constraint FK_USUARIOS_EN_ROLES_ROL foreign key (ROL)
+    references ROLES (ROL)
+)
+go
