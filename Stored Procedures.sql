@@ -37,3 +37,27 @@ SELECT PREFIJO
 , RANGO_FINAL
 FROM CONSECUTIVOS
 GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_MODIFICAR_CONSECUTIVO]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN 
+DROP PROCEDURE [dbo].[sp_MODIFICAR_CONSECUTIVO] 
+END 
+GO
+
+CREATE PROCEDURE [dbo].[sp_MODIFICAR_CONSECUTIVO] 
+( @prefijo char(5),
+  @consecutivo NVARCHAR(10),
+  @descripcion varchar(MAX),
+  @ri NVARCHAR(10),
+  @rf NVARCHAR(10))
+
+AS
+
+UPDATE CONSECUTIVOS
+SET PREFIJO = @prefijo,
+	CODIGO_CONSECUTIVO = @consecutivo,
+	DESCRIPCION_CONSECUTIVO = @descripcion,
+	RANGO_INICIAL = @ri,
+	RANGO_FINAL = @rf
+WHERE PREFIJO = @prefijo
+GO

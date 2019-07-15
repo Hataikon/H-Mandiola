@@ -149,6 +149,7 @@
     <Content Include="favicon.ico" />
     <Content Include="habitaciones.html" />
     <Content Include="js\consecutivos.js" />
+    <Content Include="js\lista_consecutivos.js" />
     <Content Include="lista_actividades.html" />
     <Content Include="lista_activos.html" />
     <Content Include="lista_consecutivos.html" />

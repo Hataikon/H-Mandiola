@@ -31,8 +31,8 @@ namespace H_Mandiola_Backend
                     Prefijo = Convert.ToString(row["PREFIJO"]),
                     Descripcion = Convert.ToString(row["Descripcion"]),
                     Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
-                    Rango_Inicial = Convert.ToInt32(row["RANGO_INICIAL"]),
-                    Rango_Final = Convert.ToInt32(row["RANGO_FINAL"])
+                    Rango_Inicial = Convert.ToString(row["RANGO_INICIAL"]),
+                    Rango_Final = Convert.ToString(row["RANGO_FINAL"])
                 };
 
                 retList.Add(temp);
@@ -59,8 +59,8 @@ namespace H_Mandiola_Backend
                     Prefijo = Convert.ToString(row["PREFIJO"]).Trim(),
                     Descripcion = Convert.ToString(row["Descripcion"]),
                     Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
-                    Rango_Inicial = Convert.ToInt32(row["RANGO_INICIAL"]),
-                    Rango_Final = Convert.ToInt32(row["RANGO_FINAL"])
+                    Rango_Inicial = Convert.ToString(row["RANGO_INICIAL"]),
+                    Rango_Final = Convert.ToString(row["RANGO_FINAL"])
                 };
 
                 retList.Add(temp);
@@ -79,6 +79,12 @@ namespace H_Mandiola_Backend
         [HttpPost]
         public IHttpActionResult AgregarConsecutivo([FromBody]Consecutivos value)
         {
+            objConsecutivos.prefijo = value.Prefijo.ToString();
+            objConsecutivos.codigo_consecutivo = value.Codigo_Consecutivo.ToString();
+            objConsecutivos.descripcion = value.Descripcion.ToString();
+            objConsecutivos.rango_inicial = value.Rango_Inicial.ToString(); 
+            objConsecutivos.rango_final = value.Rango_Final.ToString();
+            objConsecutivos.agregar_consecutivo();
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
             return Json(new { msg = "Successfully added " + value.Prefijo.ToString() }); ;
         }
@@ -87,8 +93,14 @@ namespace H_Mandiola_Backend
         [HttpPost]
         public IHttpActionResult ModificarConsecutivo([FromBody]Consecutivos value)
         {
+            objConsecutivos.prefijo = value.Prefijo.ToString();
+            objConsecutivos.codigo_consecutivo = value.Codigo_Consecutivo.ToString();
+            objConsecutivos.descripcion = value.Descripcion.ToString();
+            objConsecutivos.rango_inicial = value.Rango_Inicial.ToString();
+            objConsecutivos.rango_final = value.Rango_Final.ToString();
+            objConsecutivos.modificar_consecutivo();
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully modified " + value.Prefijo.ToString() }); ;
+            return Json(new { msg = "Successfully modified " + value.Prefijo.ToString() + "El valor del RI es "+value.Rango_Inicial }); ;
         }
 
         // PUT api/<controller>/5

@@ -35,12 +35,14 @@
             var Prefijo = $('#prefijoBox').val();
             var Descripcion = $('#descripcionDropdown').val();
             var CODIGO_CONSECUTIVO = $('#consecutivoBox').val();
-            var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO });
+            var Rango_Inicial = $('#riBox').val();
+            var Rango_Final = $('#rfBox').val();
+            var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
             alert(resJSON);
             $.ajax({
                 type: "post",
                 url: "api/Consecutivos/ModificarConsecutivo",
-                data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO }),
+                data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
@@ -54,12 +56,15 @@
             var Prefijo = $('#prefijoBox').val();
             var Descripcion = $('#descripcionDropdown').val();
             var CODIGO_CONSECUTIVO = $('#consecutivoBox').val();
-            var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO });
+            var Rango_Inicial = $('#riBox').val();
+            var Rango_Final = $('#rfBox').val();
+            var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
             alert(resJSON);
+            console.log(resJSON);
             $.ajax({
                 type: "post",
                 url: "api/Consecutivos/AgregarConsecutivo",
-                data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO }),
+                data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
@@ -68,5 +73,15 @@
                 }
             });
         }
+    });
+
+    $('#btnCancelar').click(function (e) {
+        e.preventDefault();
+        window.location.replace("lista_consecutivos.html");
+    });
+
+    $('#btnNuevo').click(function (e) {
+        e.preventDefault();
+        window.location.replace("consecutivos.html");
     });
 });

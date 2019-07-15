@@ -10,7 +10,7 @@ namespace H_Mandiola_Backend
         public string Prefijo { get; set; }
         public string Descripcion { get; set; }
         public string Codigo_Consecutivo { get; set; }
-        public int Rango_Inicial { get; set; }
-        public int Rango_Final { get; set; }
+        public string Rango_Inicial { get; set; }
+        public string Rango_Final { get; set; }
     }
 }

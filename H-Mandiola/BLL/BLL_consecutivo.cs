@@ -11,13 +11,13 @@ namespace BLL
 {
     public class BLL_consecutivo
     {
-        #region propiedades
-        private int _id_consecutivo;
+        #region variables publicas
 
-        public int id_consecutivo
+        private string _prefijo;
+        public string prefijo
         {
-            get { return _id_consecutivo; }
-            set { _id_consecutivo = value; }
+            get { return _prefijo; }
+            set { _prefijo = value; }
         }
 
         private string _codigo_consecutivo;
@@ -36,22 +36,15 @@ namespace BLL
             set { _descripcion = value; }
         }
 
-        private string _prefijo;
-        public string prefijo
-        {
-            get { return _prefijo; }
-            set { _prefijo = value; }
-        }
-
-        private int _rango_inicial;
-        public int rango_inicial
+        private string _rango_inicial;
+        public string rango_inicial
         {
             get { return _rango_inicial; }
             set { _rango_inicial = value; }
         }
 
-        private int _rango_final;
-        public int rango_final
+        private string _rango_final;
+        public string rango_final
         {
             get { return _rango_final; }
             set { _rango_final = value; }
@@ -72,6 +65,7 @@ namespace BLL
             get { return _num_error; }
             set { _num_error = value; }
         }
+
         #endregion
 
         #region variables privadas
@@ -88,7 +82,7 @@ namespace BLL
             conexion = cls_DAL.trae_conexion(@"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("Error.html?error=" + numero_error.ToString() + "&men=" + mensaje_error);
                 return null;
             }
             else
@@ -108,42 +102,82 @@ namespace BLL
 
         }
 
-        public void carga_datos_consecutivo(string prefijo)
+        public bool agregar_consecutivo()
         {
             conexion = cls_DAL.trae_conexion(@"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
                 HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return false;
             }
             else
             {
-                sql = "sp_BUSCAR_CONSECUTIVO";
-                ParamStruct[] parametros = new ParamStruct[1];
-                cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@id", SqlDbType.Char, prefijo);
-                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+                agregar_consecutivo_sub();
+
                 if (numero_error != 0)
                 {
                     HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return false;
                 }
                 else
                 {
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        _codigo_consecutivo = ds.Tables[0].Rows[0]["CODIGO_CONSECUTIVO"].ToString();
-                        _descripcion = ds.Tables[0].Rows[0]["DESCRIPCION_CONSECUTIVO"].ToString();
-                        _prefijo = ds.Tables[0].Rows[0]["PREFIJO"].ToString();
-                        _rango_inicial = Convert.ToInt32(ds.Tables[0].Rows[0]["RANGO_INICIAL"]);
-                        _rango_final = Convert.ToInt32(ds.Tables[0].Rows[0]["RANGO_FINAL"]);
-                    }
-                    else
-                    {
-                        _prefijo = "Error";
-                        _num_error = numero_error;
-                        _mensaje = mensaje_error;
-                        //objErrores.submitError(_num_error, _mensaje);
-                    }
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return true;
                 }
             }
+        }
+
+        private void agregar_consecutivo_sub()
+        {
+            sql = "sp_AGREGAR_CONSECUTIVO";
+            ParamStruct[] parametros = new ParamStruct[5];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
+            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+        }
+
+        public bool modificar_consecutivo()
+        {
+            conexion = cls_DAL.trae_conexion(@"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return false;
+            }
+            else
+            {
+                modificar_consecutivo_sub();
+
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return false;
+                }
+                else
+                {
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return true;
+                }
+            }
+        }
+
+        private void modificar_consecutivo_sub()
+        {
+            sql = "sp_MODIFICAR_CONSECUTIVO";
+            ParamStruct[] parametros = new ParamStruct[5];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
+            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
         }
         #endregion
     }
