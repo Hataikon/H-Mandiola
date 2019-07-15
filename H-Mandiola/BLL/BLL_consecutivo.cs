@@ -107,6 +107,44 @@ namespace BLL
             }
 
         }
+
+        public void carga_datos_consecutivo(string prefijo)
+        {
+            conexion = cls_DAL.trae_conexion(@"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+            }
+            else
+            {
+                sql = "sp_BUSCAR_CONSECUTIVO";
+                ParamStruct[] parametros = new ParamStruct[1];
+                cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@id", SqlDbType.Char, prefijo);
+                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        _codigo_consecutivo = ds.Tables[0].Rows[0]["CODIGO_CONSECUTIVO"].ToString();
+                        _descripcion = ds.Tables[0].Rows[0]["DESCRIPCION_CONSECUTIVO"].ToString();
+                        _prefijo = ds.Tables[0].Rows[0]["PREFIJO"].ToString();
+                        _rango_inicial = Convert.ToInt32(ds.Tables[0].Rows[0]["RANGO_INICIAL"]);
+                        _rango_final = Convert.ToInt32(ds.Tables[0].Rows[0]["RANGO_FINAL"]);
+                    }
+                    else
+                    {
+                        _prefijo = "Error";
+                        _num_error = numero_error;
+                        _mensaje = mensaje_error;
+                        //objErrores.submitError(_num_error, _mensaje);
+                    }
+                }
+            }
+        }
         #endregion
     }
 }
