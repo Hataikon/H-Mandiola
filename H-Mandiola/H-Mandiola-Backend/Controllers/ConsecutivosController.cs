@@ -70,10 +70,10 @@ namespace H_Mandiola_Backend
         // POST api/<controller>
         [Route("~/api/VerJSON")]
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Consecutivos value)
+        public String Post([FromBody]Consecutivos value)
         {
-            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully added " + value.Prefijo.ToString() }); ;
+            String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
+            return res;
         }
 
         // PUT api/<controller>/5
