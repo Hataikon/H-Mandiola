@@ -10,7 +10,7 @@ namespace H_Mandiola_Backend
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private static string CS = @"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
+        private static string CS = @"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
         SqlConnection Connection = new SqlConnection(CS);
         protected void Page_Load(object sender, EventArgs e)
         {
