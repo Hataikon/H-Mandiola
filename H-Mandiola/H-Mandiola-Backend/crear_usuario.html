@@ -98,8 +98,81 @@
                     </div>
                 </div>
             </nav>
-            <label>Form Here</label>
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Crear Usuario</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="usernameBox">Nombre de Usuario</label>
+                        <div class="col-md-4">
+                            <input id="usernameBox" name="usernameBox" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="emailBox">Email</label>
+                        <div class="col-md-4">
+                            <input id="emailBox" name="emailBox" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="passwordBox">Contraseña</label>
+                        <div class="col-md-4">
+                            <input id="passwordBox" name="passwordBox" type="password" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="confirmPasswordBox">Confirmar Contraseña</label>
+                        <div class="col-md-4">
+                            <input id="confirmPasswordBox" name="confirmPasswordBox" type="password" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="preguntaDropdown">Pregunta de Seguridad</label>
+                        <div class="col-md-4">
+                            <select id="preguntaDropdown" name="preguntaDropdown" class="form-control">
+                                <option value="Primera Mascota">¿Primera Mascota?</option>
+                                <option value="Universidad">¿Universidad en la que estudio?</option>
+                                <option value="Fruta">¿Fruta Favorita?</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="respuestaBox">Respuesta</label>
+                        <div class="col-md-4">
+                            <input id="respuestaBox" name="respuestaBox" type="text" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Button (Double) -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnGuardar"></label>
+                        <div class="col-md-8">
+                            <button id="btnGuardar" name="btnGuardar" class="btn btn-primary">Guardar</button>
+                            <button id="btnCancelar" name="btnCancelar" class="btn btn-inverse">Cancelar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
+    <script src="js/crear_usuario.js"></script>
 </body>
 </html>

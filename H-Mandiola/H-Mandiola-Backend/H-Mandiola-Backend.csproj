@@ -148,8 +148,13 @@
     <Content Include="estado_cliente.html" />
     <Content Include="favicon.ico" />
     <Content Include="habitaciones.html" />
+    <Content Include="js\cambiar_contraseña.js" />
     <Content Include="js\consecutivos.js" />
+    <Content Include="js\consulta_bitacora.js" />
+    <Content Include="js\consulta_error.js" />
+    <Content Include="js\crear_usuario.js" />
     <Content Include="js\lista_consecutivos.js" />
+    <Content Include="js\lista_usuarios.js" />
     <Content Include="lista_actividades.html" />
     <Content Include="lista_activos.html" />
     <Content Include="lista_consecutivos.html" />
@@ -306,9 +311,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Clases\Bitacora.cs" />
     <Compile Include="Clases\Consecutivos.cs" />
+    <Compile Include="Clases\Errores.cs" />
+    <Compile Include="Clases\Usuarios.cs" />
     <Compile Include="Controllers\ConsecutivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Old ASPX Stuff\actividades.aspx.cs">
       <DependentUpon>actividades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

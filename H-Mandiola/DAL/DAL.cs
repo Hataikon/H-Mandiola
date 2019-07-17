@@ -23,14 +23,14 @@ namespace DAL
         /// <param name="mensaje_error">mensaje de error o confirmacion</param>
         /// <param name="numero_error">numero del error</param>
         /// <returns></returns>
-        public static SqlConnection trae_conexion(string cadena_conexion, ref string mensaje_error, ref int numero_error)
+        public static SqlConnection trae_conexion(string nombre_conexion, ref string mensaje_error, ref int numero_error)
         {
             SqlConnection cnn;
             try
             {
-                //string cadena_conexion = "";
+                string cadena_conexion = "";
 
-                //cadena_conexion = ConfigurationManager.ConnectionStrings[nombre_conexion].ToString();
+                cadena_conexion = ConfigurationManager.ConnectionStrings[nombre_conexion].ToString();
 
                 cnn = new SqlConnection(cadena_conexion);
                 mensaje_error = String.Empty;
@@ -39,7 +39,7 @@ namespace DAL
             }
             catch (NullReferenceException ex)
             {
-                mensaje_error = "No se encontro el nombre de cadena de conexion: " + cadena_conexion + ". Información adicional: " + ex.Message;
+                mensaje_error = "No se encontro el nombre de cadena de conexion: " + nombre_conexion + ". Información adicional: " + ex.Message;
                 numero_error = -1;
                 return null;
             }

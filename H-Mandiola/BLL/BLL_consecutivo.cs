@@ -70,6 +70,9 @@ namespace BLL
         #endregion
 
         #region variables privadas
+        //Yuan Connection String = @"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
+        //Luis Connection Strring = @"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
+        string CS = "ProyectoMandiolaConnectionString";
         SqlConnection conexion;
         string mensaje_error;
         int numero_error;
@@ -80,7 +83,7 @@ namespace BLL
         #region metodos
         public DataSet carga_lista_consecutivos()
         {
-            conexion = cls_DAL.trae_conexion(@"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
                 HttpContext.Current.Response.Redirect("Error.html?error=" + numero_error.ToString() + "&men=" + mensaje_error);
@@ -105,7 +108,7 @@ namespace BLL
 
         public bool agregar_consecutivo()
         {
-            conexion = cls_DAL.trae_conexion(@"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
                 HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
@@ -144,7 +147,7 @@ namespace BLL
 
         public bool modificar_consecutivo()
         {
-            conexion = cls_DAL.trae_conexion(@"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled", ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
                 HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);

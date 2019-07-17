@@ -45,10 +45,13 @@
   <ItemGroup>
     <Compile Include="BLL_actividades.cs" />
     <Compile Include="BLL_activos.cs" />
+    <Compile Include="BLL_bitacora.cs" />
     <Compile Include="BLL_cliente.cs" />
     <Compile Include="BLL_consecutivo.cs" />
+    <Compile Include="BLL_error.cs" />
     <Compile Include="BLL_habitaciones.cs" />
     <Compile Include="BLL_precios.cs" />
+    <Compile Include="BLL_usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
