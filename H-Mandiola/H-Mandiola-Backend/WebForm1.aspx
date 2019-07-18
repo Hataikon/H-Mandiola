@@ -10,7 +10,9 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <asp:Button ID="Button1" runat="server" OnClick="CrearUsuario_Click" Text="CrearUsuario" />
+        <asp:Button ID="Button2" runat="server" OnClick="CrearConsecutivo_Click" Text="CrearConsecutivo" />
+        <asp:Button ID="Button3" runat="server" OnClick="CrearConsulta_Click" Text="CrearConsulta" />
     </form>
 </body>
 </html>

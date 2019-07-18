@@ -85,14 +85,14 @@ go
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('USUARIOS_EN_ROLES') and o.name = 'FK_USUARIOS_EN_ROLES_USUARIO')
-alter table COMPRAS
+alter table USUARIOS_EN_ROLES
    drop constraint FK_USUARIOS_EN_ROLES_USUARIO
 go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('USUARIOS_EN_ROLES') and o.name = 'FK_USUARIOS_EN_ROLES_ROL')
-alter table COMPRAS
+alter table USUARIOS_EN_ROLES
    drop constraint FK_USUARIOS_EN_ROLES_ROL
 go
 
@@ -616,7 +616,7 @@ CREATE TABLE USUARIOS (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-      EMAIL varchar(60) COLLATE Latin1_General_BIN2 
+   EMAIL varchar(60) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -633,7 +633,37 @@ CREATE TABLE USUARIOS (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   )not null
+   )not null,
+   isAdmin CHAR(1) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+   isSeguridad CHAR(1) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+   isConsecutivo CHAR(1) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+   isMantenimiento CHAR(1) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   ),
+   isConsulta CHAR(1) COLLATE Latin1_General_BIN2 
+   ENCRYPTED WITH (
+	COLUMN_ENCRYPTION_KEY = CEK1,
+	ENCRYPTION_TYPE = Deterministic,
+	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+   )
 )
 GO
 

@@ -10,14 +10,14 @@ namespace H_Mandiola_Backend
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private static string CS = @"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
+        private static string CS = @"Data Source=.\SQLEXPRESS;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
         SqlConnection Connection = new SqlConnection(CS);
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void CrearConsecutivo_Click(object sender, EventArgs e)
         {
             String Prefijo = "HA2";
             int Consecutivo = 1;
@@ -25,11 +25,6 @@ namespace H_Mandiola_Backend
             int ri = 1;
             int rf = 200;
 
-            InsertData(Prefijo, Consecutivo, Descripcion, ri, rf);
-        }
-
-        private void InsertData(String Prefijo, int Consecutivo, String Descripcion, int ri, int rf)
-        {
             Connection.Open();
 
             //Insertar en Consecutivo
@@ -54,25 +49,87 @@ namespace H_Mandiola_Backend
             cmd.Parameters["@rf"].Value = rf;
 
             cmd.ExecuteNonQuery();
+        }
 
-            //Insertar en Aerolinea
+        protected void CrearUsuario_Click(object sender, EventArgs e)
+        {
+            string Username = "Admin";
+            string Password = "Ulacit2018";
+            string Email = "admin@adminmail.com";
+            string Pregunta = "Universidad";
+            string Respuesta = "Ulacit";
+            string isAdmin = "1";
 
-            /*
-            String executeCommand = "sp_AGREGAR_AEROLINEA";
+            Connection.Open();
+
+            //Insertar en Consecutivo
+            string executeCommand = "sp_AGREGAR_USUARIO_BACKDOOR";
             SqlCommand cmd = new SqlCommand(executeCommand, Connection);
 
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@consecutivo", System.Data.SqlDbType.NVarChar);
-            cmd.Parameters["@consecutivo"].Value = Consecutivo;
+            cmd.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@username"].Value = Username;
 
-            cmd.Parameters.Add("@prefijo", System.Data.SqlDbType.Char);
-            cmd.Parameters["@prefijo"].Value = Prefijo;
+            cmd.Parameters.Add("@password", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@password"].Value = Password;
 
-            cmd.Parameters.Add("@descripcion", System.Data.SqlDbType.VarChar);
-            cmd.Parameters["@descripcion"].Value = Descripcion;
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@email"].Value = Email;
 
-            cmd.ExecuteNonQuery();*/
+            cmd.Parameters.Add("@pregunta", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@pregunta"].Value = Pregunta;
+
+            cmd.Parameters.Add("@respuesta", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@respuesta"].Value = Respuesta;
+
+            cmd.Parameters.Add("@isAdmin", System.Data.SqlDbType.Char);
+            cmd.Parameters["@isAdmin"].Value = isAdmin;
+
+            cmd.ExecuteNonQuery();
+        }
+
+        protected void CrearConsulta_Click(object sender, EventArgs e)
+        {
+            string Username = "Admin";
+            string Password = "Ulacit2018";
+            string Email = "admin@adminmail.com";
+            string Pregunta = "Universidad";
+            string Respuesta = "Ulacit";
+            string isAdmin = "1";
+
+            Connection.Open();
+
+            //Insertar en Consecutivo
+            string executeCommand = "sp_AGREGAR_USUARIO_BACKDOOR";
+            SqlCommand cmd = new SqlCommand(executeCommand, Connection);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@username", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@username"].Value = Username;
+
+            cmd.Parameters.Add("@password", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@password"].Value = Password;
+
+            cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@email"].Value = Email;
+
+            cmd.Parameters.Add("@pregunta", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@pregunta"].Value = Pregunta;
+
+            cmd.Parameters.Add("@respuesta", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@respuesta"].Value = Respuesta;
+
+            cmd.Parameters.Add("@isAdmin", System.Data.SqlDbType.Char);
+            cmd.Parameters["@isAdmin"].Value = isAdmin;
+
+            cmd.ExecuteNonQuery();
+        }
+
+        private void InsertData(String Prefijo, int Consecutivo, String Descripcion, int ri, int rf)
+        {
+            
         }
     }
 }

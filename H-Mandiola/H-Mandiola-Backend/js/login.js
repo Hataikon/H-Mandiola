@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
     document.cookie = "username=;path=/";
+    document.cookie = "isAdmin=;path=/";
+    document.cookie = "isSeguridad=;path=/";
+    document.cookie = "isConsecutivo=;path=/";
+    document.cookie = "isMantenimiento=;path=/";
+    document.cookie = "isConsulta=;path=/";
 
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
@@ -12,6 +17,11 @@
             }
             else {
                 document.cookie = "username=" + data["Username"] + ";path=/";
+                document.cookie = "isAdmin=" + data["isAdmin"] + ";path=/";
+                document.cookie = "isSeguridad=" + data["isSeguridad"] + ";path=/";
+                document.cookie = "isConsecutivo=" + data["isSeguridad"] + ";path=/";
+                document.cookie = "isMantenimiento=" + data["isSeguridad"] + ";path=/";
+                document.cookie = "isConsulta=" + data["isSeguridad"] + ";path=/";
                 window.location.replace("default.html");
             }
             console.log(data);

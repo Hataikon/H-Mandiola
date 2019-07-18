@@ -98,8 +98,51 @@
                     </div>
                 </div>
             </nav>
-            <label>Form Here</label>
+            <div class="row">
+                <div class="col-md-4">
+                    <select id="selectmultiple" name="selectmultiple" class="form-control" multiple="multiple">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label for="rolesCheckboxes-0">
+                            <input type="checkbox" name="rolesCheckboxes" id="rolesCheckboxes-1" value="1">
+                            Admin
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="rolesCheckboxes-1">
+                            <input type="checkbox" name="rolesCheckboxes" id="rolesCheckboxes-2" value="2">
+                            Seguridad
+                        </label>
+                        <div class="checkbox">
+                            <label for="rolesCheckboxes-2">
+                                <input type="checkbox" name="rolesCheckboxes" id="rolesCheckboxes-3" value="3">
+                                Consecutivo
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="rolesCheckboxes-3">
+                                <input type="checkbox" name="rolesCheckboxes" id="rolesCheckboxes-4" value="4">
+                                Mantenimiento
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="rolesCheckboxes-4">
+                                <input type="checkbox" name="rolesCheckboxes" id="rolesCheckboxes-5" value="5">
+                                Consulta
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <button id="btnActualizar" name="btnActualizar" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="js/lista_usuarios.js"></script>
 </body>
 </html>
