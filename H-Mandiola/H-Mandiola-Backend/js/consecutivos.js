@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
 
+    function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+    };
+
+    $("#usernameNavBar").text(getCookie("username"));
+
     function getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {

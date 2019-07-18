@@ -59,5 +59,16 @@ namespace H_Mandiola_Backend.Controllers
             }*/
             return result;
         }
+
+        [Route("~/api/Usuarios/CambiarContraseña")]
+        [HttpPost]
+        public IHttpActionResult CambiarContraseña([FromBody]Usuarios value)
+        {
+            objUsuario.nombre_usuario = value.Username.ToString();
+            objUsuario.password = value.Password.ToString();
+            objUsuario.cambiar_contraseña();
+            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
+            return Json(new { msg = "Successfully added " + value.Username.ToString() }); ;
+        }
     }
 }

@@ -145,6 +145,43 @@ namespace BLL
             cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
         }
+
+        public bool cambiar_contraseña ()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return false;
+            }
+            else
+            {
+                cambiar_contraseña_sub();
+
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return false;
+                }
+                else
+                {
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return true;
+                }
+            }
+        }
+
+        private void cambiar_contraseña_sub()
+        {
+
+            sql = "sp_CAMBIAR_CONTRASEÑA";
+            ParamStruct[] parametros = new ParamStruct[2];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@username", SqlDbType.VarChar, _nombre_usuario);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@password", SqlDbType.VarChar, _password);
+            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+        }
         #endregion
     }
 }

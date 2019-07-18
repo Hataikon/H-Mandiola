@@ -98,8 +98,51 @@
                     </div>
                 </div>
             </nav>
-            <label>Form Here</label>
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Cambiar Contraseña</legend>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="oldpasswordBox">Contraseña</label>
+                        <div class="col-md-4">
+                            <input id="oldpasswordBox" name="oldpasswordBox" type="password" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="newPasswordBox">Nueva Contraseña</label>
+                        <div class="col-md-4">
+                            <input id="newPasswordBox" name="newPasswordBox" type="password" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="confirmPassBox">Confirmar Contraseña</label>
+                        <div class="col-md-4">
+                            <input id="confirmPassBox" name="confirmPassBox" type="password" placeholder="" class="form-control input-md">
+
+                        </div>
+                    </div>
+
+                    <!-- Button (Double) -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="btnGuardar"></label>
+                        <div class="col-md-8">
+                            <button id="btnGuardar" name="btnGuardar" class="btn btn-primary">Cambiar</button>
+                            <button id="btnCancelar" name="btnCancelar" class="btn btn-inverse">Cancelar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
+    <script src="js/cambiar_contraseña.js"></script>
 </body>
 </html>
