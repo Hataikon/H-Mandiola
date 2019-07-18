@@ -89,7 +89,7 @@ namespace BLL
             }
             else
             {
-                sql = "sp_TRAE_LISTA_CONSECUTIVOS";
+                sql = "sp_TRAE_LISTA_USUARIOS";
                 ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref mensaje_error, ref numero_error);
                 if (numero_error != 0)
                 {
@@ -103,6 +103,8 @@ namespace BLL
             }
 
         }
+
+
 
         public bool agregar_usuario()
         {
@@ -132,7 +134,7 @@ namespace BLL
 
         private void agregar_usuario_sub()
         {
-            
+
             sql = "sp_AGREGAR_USUARIO";
             ParamStruct[] parametros = new ParamStruct[5];
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@username", SqlDbType.VarChar, _nombre_usuario);
