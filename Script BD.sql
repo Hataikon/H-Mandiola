@@ -534,13 +534,13 @@ GO
 ------------------------------------------------------------------------------
 
 create table ERRORES (
-   NUMERO_ERROR NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   NUMERO_ERROR VARCHAR(10) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-   FECHA_HORA_ERROR NVARCHAR(20) COLLATE Latin1_General_BIN2 
+   FECHA_HORA_ERROR VARCHAR(20) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -560,7 +560,7 @@ GO
 ------------------------------------------------------------------------------
 
 create table BITACORA (
-   CODIGO_REGISTRO NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   CODIGO_REGISTRO VARCHAR(10) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -572,7 +572,7 @@ create table BITACORA (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-   FECHA_HORA_BITACORA NVARCHAR(20) COLLATE Latin1_General_BIN2 
+   FECHA_HORA_BITACORA VARCHAR(20) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -595,7 +595,7 @@ create table BITACORA (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   )not null,
+   )not null
 )
 GO
 

@@ -109,9 +109,16 @@ namespace H_Mandiola_Backend.Controllers
         {
             objUsuario.nombre_usuario = value.Username.ToString();
             objUsuario.password = value.Password.ToString();
-            objUsuario.cambiar_contraseña();
+            if (objUsuario.cambiar_contraseña())
+            {
+                return Json(new { msg = "Successfully added " + value.Username.ToString() });
+            }
+            else
+            {
+                return Json(new { msg = "Error storing  " + value.Username.ToString() });
+            }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully added " + value.Username.ToString() }); ;
+            
         }
 
         [Route("~/api/Usuarios")]
@@ -157,9 +164,16 @@ namespace H_Mandiola_Backend.Controllers
             objUsuario.isConsecutivo = value.isConsecutivo.ToString();
             objUsuario.isMantenimiento = value.isMantenimiento.ToString();
             objUsuario.isConsulta = value.isConsulta.ToString();
-            objUsuario.actualizar_roles();
+            if (objUsuario.actualizar_roles())
+            {
+                return Json(new { msg = "Se han actualizado los roles " });
+            }
+            else
+            {
+                return Json(new { msg = "No se actualizaron los roles " });
+            }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Se han actualizado los roles "}); ;
+            
         }
     }
 }

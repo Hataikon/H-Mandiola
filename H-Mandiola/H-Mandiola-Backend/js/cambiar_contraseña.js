@@ -23,6 +23,10 @@
             success: function (response) {
                 console.log(response.msg)
                 alert(response.msg)
+            },
+            error: function (response) {
+                console.log(response);
+                window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
             }
         });
     });

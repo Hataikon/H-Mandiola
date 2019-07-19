@@ -74,8 +74,6 @@ namespace BLL
         //Luis Connection Strring = @"Data Source=(localdb)\CGEL;Initial Catalog = ProyectoMandiola;Integrated Security = True; Column Encryption Setting = Enabled";
         string CS = "ProyectoMandiolaConnectionString";
         SqlConnection conexion;
-        string mensaje_error;
-        int numero_error;
         string sql;
         DataSet ds;
         #endregion
@@ -83,19 +81,19 @@ namespace BLL
         #region metodos
         public DataSet carga_lista_consecutivos()
         {
-            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref _mensaje, ref _num_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.html?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("error.html?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
                 return null;
             }
             else
             {
                 sql = "sp_TRAE_LISTA_CONSECUTIVOS";
-                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref mensaje_error, ref numero_error);
-                if (numero_error != 0)
+                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref _mensaje, ref _num_error);
+                if (_num_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + _num_error.ToString() + "&men=Error_Consiguiendo_Lista");
                     return null;
                 }
                 else
@@ -108,25 +106,25 @@ namespace BLL
 
         public bool agregar_consecutivo()
         {
-            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref _mensaje, ref _num_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
                 return false;
             }
             else
             {
                 agregar_consecutivo_sub();
 
-                if (numero_error != 0)
+                if (_num_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
-                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    HttpContext.Current.Response.Redirect("https://localhost:44331/error.html?error=" + _num_error.ToString() + "&men=Error_Agregando_Consecutivos");
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return false;
                 }
                 else
                 {
-                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return true;
                 }
             }
@@ -141,31 +139,31 @@ namespace BLL
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
-            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
-            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+            cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
         }
 
         public bool modificar_consecutivo()
         {
-            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            conexion = cls_DAL.trae_conexion(CS, ref _mensaje, ref _num_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
                 return false;
             }
             else
             {
                 modificar_consecutivo_sub();
 
-                if (numero_error != 0)
+                if (_num_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
-                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + _num_error.ToString() + "&men=Error_Modificando_Consecutivos");
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return false;
                 }
                 else
                 {
-                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return true;
                 }
             }
@@ -180,8 +178,8 @@ namespace BLL
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
-            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
-            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+            cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
         }
         #endregion
     }

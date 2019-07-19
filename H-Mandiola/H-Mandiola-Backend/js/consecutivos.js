@@ -55,6 +55,36 @@
                 success: function (response) {
                     console.log(response.msg)
                     alert(response.msg)
+                },
+
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+
+            var Codigo_Registro = Prefijo;
+            var Usuario = getCookie("username");
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var Fecha_Hora = date + ' ' + time;
+            var Tipo = "Modificar";
+            var Descripcion = "Consecutivo";
+            var Detalle = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
+            $.ajax({
+                type: "post",
+                url: "api/Bitacora/AgregarRegistro",
+                data: JSON.stringify({ Codigo_Registro: Codigo_Registro, Usuario: Usuario, Fecha_Hora: Fecha_Hora, Tipo: Tipo, Descripcion: Descripcion, Detalle: Detalle }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.msg);
+                },
+
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
                 }
             });
         }
@@ -75,8 +105,36 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (response) {
+                    console.log(response.msg);
+                },
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+
+            var Codigo_Registro = Prefijo;
+            var Usuario = getCookie("username");
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var Fecha_Hora = date + ' ' + time;
+            var Tipo = "Agregar";
+            var Descripcion = "Consecutivo";
+            var Detalle = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
+            $.ajax({
+                type: "post",
+                url: "api/Bitacora/AgregarRegistro",
+                data: JSON.stringify({ Codigo_Registro: Codigo_Registro, Usuario: Usuario, Fecha_Hora: Fecha_Hora, Tipo: Tipo, Descripcion: Descripcion, Detalle: Detalle }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
                     console.log(response.msg)
-                    alert(response.msg)
+                },
+
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
                 }
             });
         }
