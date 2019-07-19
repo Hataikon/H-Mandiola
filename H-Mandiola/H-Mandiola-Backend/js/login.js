@@ -19,9 +19,9 @@
                 document.cookie = "username=" + data["Username"] + ";path=/";
                 document.cookie = "isAdmin=" + data["isAdmin"] + ";path=/";
                 document.cookie = "isSeguridad=" + data["isSeguridad"] + ";path=/";
-                document.cookie = "isConsecutivo=" + data["isSeguridad"] + ";path=/";
-                document.cookie = "isMantenimiento=" + data["isSeguridad"] + ";path=/";
-                document.cookie = "isConsulta=" + data["isSeguridad"] + ";path=/";
+                document.cookie = "isConsecutivo=" + data["isConsecutivo"] + ";path=/";
+                document.cookie = "isMantenimiento=" + data["isMantenimiento"] + ";path=/";
+                document.cookie = "isConsulta=" + data["isConsulta"] + ";path=/";
                 window.location.replace("default.html");
             }
             console.log(data);
