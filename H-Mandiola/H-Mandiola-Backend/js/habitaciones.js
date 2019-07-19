@@ -168,5 +168,15 @@
         
     });
 
+    $('#btnCerrar').click(function (e) {
+        e.preventDefault();
+        window.location.replace("lista_habitaciones.html");
+    });
+
+    $('#btnNuevo').click(function (e) {
+        e.preventDefault();
+        window.location.replace("habitaciones.html");
+    });
+
 
 });
