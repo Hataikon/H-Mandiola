@@ -121,7 +121,7 @@
             var Codigo_Consecutivo = $('#codigoBox').val();
             var Prefijo = Codigo_Consecutivo.substring(0, Codigo_Consecutivo.indexOf('-'));
             var Nombre = $('#nombreBox').val();
-            var Descripcion = $('#descripcionBox').val();;
+            var Descripcion = $('#descripcionBox').val();
             var Imagen = $('#imagen').attr('src');
             resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Nombre: Nombre, Descripcion: Descripcion, Imagen: Imagen });
             $.ajax({
@@ -149,6 +149,7 @@
             var Tipo = "Agregar";
             var Descripcion = "Habitacion";
             var Detalle = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Nombre: Nombre, Descripcion: Descripcion, Imagen: Imagen });
+            alert(Usuario)
             $.ajax({
                 type: "post",
                 url: "api/Bitacora/AgregarRegistro",

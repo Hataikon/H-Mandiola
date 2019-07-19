@@ -121,7 +121,7 @@
             var Codigo_Consecutivo = $('#codigoBox').val();
             var Prefijo = Codigo_Consecutivo.substring(0, Codigo_Consecutivo.indexOf('-'));
             var Numero = $('#numeroBox').val();
-            var Descripcion = $('#habitacionDropdown').val();;
+            var Descripcion = $('#habitacionDropdown').val();
             var Imagen = $('#imagen').attr('src');
             resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen });
             $.ajax({

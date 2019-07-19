@@ -177,7 +177,7 @@ namespace BLL
             sql = "sp_MODIFICAR_ACTIVIDAD";
             ParamStruct[] parametros = new ParamStruct[4];
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@codigo", SqlDbType.VarChar, _codigo_consecutivo);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@numero", SqlDbType.VarChar, _nombre);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@nombre", SqlDbType.VarChar, _nombre);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@img", SqlDbType.VarChar, _imagen_actividad);
             cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
