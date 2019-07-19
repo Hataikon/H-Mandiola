@@ -149,7 +149,6 @@
             var Tipo = "Agregar";
             var Descripcion = "Habitacion";
             var Detalle = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Nombre: Nombre, Descripcion: Descripcion, Imagen: Imagen });
-            alert(Usuario)
             $.ajax({
                 type: "post",
                 url: "api/Bitacora/AgregarRegistro",

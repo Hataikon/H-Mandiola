@@ -76,7 +76,7 @@ namespace BLL
             }
             else
             {
-                sql = "sp_TRAE_LISTA_ACTIVO";
+                sql = "sp_TRAE_LISTA_ACTIVOS";
                 ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref mensaje_error, ref numero_error);
                 if (numero_error != 0)
                 {
@@ -91,7 +91,7 @@ namespace BLL
 
         }
 
-        public bool agregar_activos()
+        public bool agregar_activo()
         {
             conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
@@ -101,7 +101,7 @@ namespace BLL
             }
             else
             {
-                agregar_activos_sub();
+                agregar_activo_sub();
 
                 if (numero_error != 0)
                 {
@@ -117,14 +117,17 @@ namespace BLL
             }
         }
 
-        private void agregar_activos_sub()
+        private void agregar_activo_sub()
         {
-            sql = "sp_AGREGAR_ACTIVO";
+            sql = "sp_INSERTAR_ACTIVO";
+            string consecutivo_str = _codigo_consecutivo.Substring(_codigo_consecutivo.LastIndexOf('-') + 1);
+            int consecutivo = Convert.ToInt32(consecutivo_str) + 1;
             ParamStruct[] parametros = new ParamStruct[5];
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@codigo", SqlDbType.VarChar, _codigo_consecutivo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@nombre", SqlDbType.VarChar, _nombre);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@consecutivo", SqlDbType.NVarChar, consecutivo);
             cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
         }
@@ -157,12 +160,11 @@ namespace BLL
 
         private void modificar_activo_sub()
         {
-            sql = "sp_MODIFICAR_ACTIVOS";
-            ParamStruct[] parametros = new ParamStruct[5];
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            sql = "sp_MODIFICAR_ACTIVO";
+            ParamStruct[] parametros = new ParamStruct[3];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@codigo", SqlDbType.VarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@nombre", SqlDbType.VarChar, _nombre);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@nombre", SqlDbType.VarChar, _nombre);
             cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
         }

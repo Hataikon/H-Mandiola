@@ -28,11 +28,11 @@ namespace H_Mandiola_Backend
 
                 var temp = new Activos()
                 {
-                    Prefijo = Convert.ToString(row["PREFIJO"]),
-                    Descripcion = Convert.ToString(row["Descripcion"]),
                     Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
-                    Nombre = Convert.ToString(row["NOMBRE"])
-                    
+                    Prefijo = Convert.ToString(row["PREFIJO"]),
+                    Nombre = Convert.ToString(row["NOMBRE"]),
+                    Descripcion = Convert.ToString(row["DESCRIPCION_CONSECUTIVO"])
+
                 };
 
                 retList.Add(temp);
@@ -41,9 +41,9 @@ namespace H_Mandiola_Backend
             return retList;
         }
 
-        [Route("~/api/Activos/BuscarActivos")]
+        [Route("~/api/Activos/BuscarActivo")]
         [HttpGet]
-        public Activos BuscarActivos(string prefijo)
+        public Activos BuscarActivos(string codigo)
         {
             DataSet ds = objActivos.carga_lista_activos();
             DataTable dt = ds.Tables[0];
@@ -56,17 +56,17 @@ namespace H_Mandiola_Backend
 
                 var temp = new Activos()
                 {
-                    Prefijo = Convert.ToString(row["PREFIJO"]).Trim(),
-                    Descripcion = Convert.ToString(row["Descripcion"]),
                     Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
-                    Nombre = Convert.ToString(row["NOMBRE"])
-                    
+                    Prefijo = Convert.ToString(row["PREFIJO"]),
+                    Nombre = Convert.ToString(row["NOMBRE"]),
+                    Descripcion = Convert.ToString(row["DESCRIPCION_CONSECUTIVO"])
+
                 };
 
                 retList.Add(temp);
             }
 
-            var result = retList.FirstOrDefault((p) => p.Prefijo == prefijo);
+            var result = retList.FirstOrDefault((p) => p.Codigo_Consecutivo == codigo);
             /*if (result == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -79,26 +79,35 @@ namespace H_Mandiola_Backend
         [HttpPost]
         public IHttpActionResult AgregarActivo([FromBody]Activos value)
         {
-            objActivos.prefijo = value.Prefijo.ToString();
             objActivos.codigo_consecutivo = value.Codigo_Consecutivo.ToString();
-            objActivos.descripcion = value.Descripcion.ToString();
+            objActivos.prefijo = value.Prefijo.ToString();
             objActivos.nombre = value.Nombre.ToString();
-            objActivos.agregar_activos();
-            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully added " + value.Prefijo.ToString() }); ;
+            objActivos.descripcion = value.Descripcion.ToString();
+            if (objActivos.agregar_activo())
+            {
+                return Json(new { msg = "Successfully added " + value.Prefijo.ToString() });
+            }
+            else
+            {
+                return Json(new { msg = "Error " + value.Prefijo.ToString() });
+            }
         }
 
         [Route("~/api/Activos/ModificarActivo")]
         [HttpPost]
         public IHttpActionResult ModificarActivo([FromBody]Activos value)
         {
-            objActivos.prefijo = value.Prefijo.ToString();
             objActivos.codigo_consecutivo = value.Codigo_Consecutivo.ToString();
-            objActivos.descripcion = value.Descripcion.ToString();
             objActivos.nombre = value.Nombre.ToString();
-            objActivos.modificar_activo();
-            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully modified " + value.Prefijo.ToString() + "Su activo es " + value.Nombre }); ;
+            objActivos.descripcion = value.Descripcion.ToString();
+            if (objActivos.modificar_activo())
+            {
+                return Json(new { msg = "Successfully added "});
+            }
+            else
+            {
+                return Json(new { msg = "Error"});
+            }
         }
 
         // PUT api/<controller>/5
