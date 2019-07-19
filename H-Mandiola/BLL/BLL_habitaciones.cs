@@ -141,15 +141,54 @@ namespace BLL
 
         private void agregar_habitacion_sub()
         {
-            sql = "sp_AGREGAR_CONSECUTIVO";
+            sql = "sp_INSERTAR_HABITACION";
             ParamStruct[] parametros = new ParamStruct[6];
-            int consecutivo = Convert.ToInt32(_codigo_consecutivo.Split('-')[0]) + 1;
+            string consecutivo_str = _codigo_consecutivo.Substring(_codigo_consecutivo.LastIndexOf('-') + 1);
+            int consecutivo = Convert.ToInt32(consecutivo_str) + 1;
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@codigo", SqlDbType.VarChar, _codigo_consecutivo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@prefijo", SqlDbType.Char, _prefijo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@numero", SqlDbType.NVarChar, _numero);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@descripcion", SqlDbType.VarChar, _descripcion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@img", SqlDbType.VarChar, _imagen_habitacion);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 5, "@consecutivo", SqlDbType.NVarChar, consecutivo);
+            cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
+        }
+
+        public bool modificar_habitacion()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref _mensaje, ref _num_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
+                return false;
+            }
+            else
+            {
+                modificar_habitacion_sub();
+
+                if (_num_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("https://localhost:44331/error.html?error=" + _num_error.ToString() + "&men=Error_Agregando_Consecutivos");
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
+                    return false;
+                }
+                else
+                {
+                    cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
+                    return true;
+                }
+            }
+        }
+
+        private void modificar_habitacion_sub()
+        {
+            sql = "sp_MODIFICAR_HABITACION";
+            ParamStruct[] parametros = new ParamStruct[4];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@codigo", SqlDbType.VarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@numero", SqlDbType.NVarChar, _numero);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@img", SqlDbType.VarChar, _imagen_habitacion);
             cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
         }

@@ -23,14 +23,44 @@
         $("#codigoBox").val($(this).children("option:selected").val());
     });
 
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
+    };
+
+    function getUrlParam(parameter, defaultvalue) {
+        var urlparameter = defaultvalue;
+        if (window.location.href.indexOf(parameter) > -1) {
+            urlparameter = getUrlVars()[parameter];
+        }
+        return urlparameter;
+    };
+
+    var codigo = getUrlParam('codigo', '0');
+
+    if (codigo != '0') {
+        $.getJSON("/api/Habitaciones/BuscarHabitacion?codigo=" + codigo, function (data) {
+            $('#consecutivoDropdown').append('<option value="' + data["Codigo_Consecutivo"] + '">' + data["Codigo_Consecutivo"] + '</option>');
+            $("#consecutivoDropdown").val(data["Codigo_Consecutivo"]);
+            $("#codigoBox").val(data["Codigo_Consecutivo"]);
+            $("#habitacionDropdown").val(data["Descripcion"]);
+            $("#numeroBox").val(data["Numero"]);
+            $('#imagen').attr('src', data["Imagen"])
+
+        });
+    }
+
     $("#btnImagen").change(function (e) {
         e.preventDefault();
         if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 base64 = e.target.result;
-                $('#imagen').attr('src', e.target.result).width(150).height(200);
-                $('#imageString').text(e.target.result);
+                $('#imagen').attr('src', e.target.result);
+                //$('#imageString').text(e.target.result);
             };
 
             reader.readAsDataURL(this.files[0])
@@ -39,31 +69,103 @@
 
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
-        var Codigo_Consecutivo = $('#codigoBox').val();
-        var Prefijo;
-        var Numero;
-        var Descripcion;
-        var image = $('#imageString').text();
+        if (codigo != '0') {
+            var Codigo_Consecutivo = $('#codigoBox').val();
+            var Numero = $('#numeroBox').val();
+            var Descripcion = $('#habitacionDropdown').val();;
+            var Imagen = $('#imagen').attr('src');
+            resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen });
+            $.ajax({
+                type: "post",
+                url: "api/Habitaciones/ModificarHabitacion",
+                data: JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.msg)
+                    alert(response.msg)
+                },
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+
+            var Codigo_Registro = Codigo_Consecutivo;
+            var Usuario = getCookie("username");
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var Fecha_Hora = date + ' ' + time;
+            var Tipo = "Modificar";
+            var Descripcion = "Habitacion";
+            var Detalle = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen });
+            $.ajax({
+                type: "post",
+                url: "api/Bitacora/AgregarRegistro",
+                data: JSON.stringify({ Codigo_Registro: Codigo_Registro, Usuario: Usuario, Fecha_Hora: Fecha_Hora, Tipo: Tipo, Descripcion: Descripcion, Detalle: Detalle }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.msg)
+                },
+
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+
+        }
+        else {
+            var Codigo_Consecutivo = $('#codigoBox').val();
+            var Prefijo = Codigo_Consecutivo.substring(0, Codigo_Consecutivo.indexOf('-'));
+            var Numero = $('#numeroBox').val();
+            var Descripcion = $('#habitacionDropdown').val();;
+            var Imagen = $('#imagen').attr('src');
+            resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen });
+            $.ajax({
+                type: "post",
+                url: "api/Habitaciones/AgregarHabitacion",
+                data: JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.msg)
+                    alert(response.msg)
+                },
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+
+            var Codigo_Registro = Codigo_Consecutivo;
+            var Usuario = getCookie("username");
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var Fecha_Hora = date + ' ' + time;
+            var Tipo = "Agregar";
+            var Descripcion = "Habitacion";
+            var Detalle = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Numero: Numero, Descripcion: Descripcion, Imagen: Imagen });
+            $.ajax({
+                type: "post",
+                url: "api/Bitacora/AgregarRegistro",
+                data: JSON.stringify({ Codigo_Registro: Codigo_Registro, Usuario: Usuario, Fecha_Hora: Fecha_Hora, Tipo: Tipo, Descripcion: Descripcion, Detalle: Detalle }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response.msg)
+                },
+
+                error: function (response) {
+                    console.log(response);
+                    window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                }
+            });
+        }
         
-        console.log(image);
-        /*resJSON = JSON.stringify({ Username: Username, isAdmin: isAdmin, isSeguridad: isSeguridad, isConsecutivo: isConsecutivo, isMantenimiento: isMantenimiento, isConsulta: isConsulta });
-        alert(resJSON);
-        console.log(resJSON);
-        $.ajax({
-            type: "post",
-            url: "api/Usuarios/ActualizarRoles",
-            data: JSON.stringify({ Username: Username, isAdmin: isAdmin, isSeguridad: isSeguridad, isConsecutivo: isConsecutivo, isMantenimiento: isMantenimiento, isConsulta: isConsulta }),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (response) {
-                console.log(response.msg)
-                alert(response.msg)
-            },
-            error: function (response) {
-                console.log(response);
-                window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
-            }
-        });*/
     });
 
 

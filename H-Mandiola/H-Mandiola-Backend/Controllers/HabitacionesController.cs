@@ -32,7 +32,7 @@ namespace H_Mandiola_Backend
                     Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
                     Prefijo = Convert.ToString(row["PREFIJO"]),
                     Numero = Convert.ToString(row["NUMERO"]),
-                    Descripcion = Convert.ToString(row["DESCRIPCION CONSECUTIVO"]),
+                    Descripcion = Convert.ToString(row["DESCRIPCION_CONSECUTIVO"]),
                     Imagen = Convert.ToString(row["IMAGEN_HABITACION"])
                 };
 
@@ -40,6 +40,39 @@ namespace H_Mandiola_Backend
             }
 
             return retList;
+        }
+
+        [Route("~/api/Habitaciones/BuscarHabitacion")]
+        [HttpGet]
+        public Habitaciones BuscarConsecutivo(string codigo)
+        {
+            DataSet ds = objHabitaciones.carga_lista_habitaciones();
+            DataTable dt = ds.Tables[0];
+
+            var retList = new List<Habitaciones>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                var row = dt.Rows[i];
+
+                var temp = new Habitaciones()
+                {
+                    Codigo_Consecutivo = Convert.ToString(row["CODIGO_CONSECUTIVO"]),
+                    Prefijo = Convert.ToString(row["PREFIJO"]),
+                    Numero = Convert.ToString(row["NUMERO"]),
+                    Descripcion = Convert.ToString(row["DESCRIPCION_CONSECUTIVO"]),
+                    Imagen = Convert.ToString(row["IMAGEN_HABITACION"])
+                };
+
+                retList.Add(temp);
+            }
+
+            var result = retList.FirstOrDefault((p) => p.Codigo_Consecutivo == codigo);
+            /*if (result == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }*/
+            return result;
         }
 
         [Route("~/api/Habitaciones/AgregarHabitacion")]
@@ -58,6 +91,26 @@ namespace H_Mandiola_Backend
             else
             {
                 return Json(new { msg = "Error " + value.Prefijo.ToString() });
+            }
+            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
+
+        }
+
+        [Route("~/api/Habitaciones/ModificarHabitacion")]
+        [HttpPost]
+        public IHttpActionResult ModificarConsecutivo([FromBody]Habitaciones value)
+        {
+            objHabitaciones.codigo_consecutivo = value.Codigo_Consecutivo.ToString();
+            objHabitaciones.numero = value.Numero.ToString();
+            objHabitaciones.descripcion = value.Descripcion.ToString();
+            objHabitaciones.imagen_habitacion = value.Imagen.ToString();
+            if (objHabitaciones.modificar_habitacion())
+            {
+                return Json(new { msg = "Succesfully Modified" });
+            }
+            else
+            {
+                return Json(new { msg = "1", numero_error = objHabitaciones.num_error, mensaje_error = objHabitaciones.mensaje });
             }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
 
