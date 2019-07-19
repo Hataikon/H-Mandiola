@@ -109,8 +109,6 @@
                         <label class="col-md-4 control-label" for="consecutivoDropdown">Consecutivo</label>
                         <div class="col-md-4">
                             <select id="consecutivoDropdown" name="consecutivoDropdown" class="form-control">
-                                <option value="1">Option one</option>
-                                <option value="2">Option two</option>
                             </select>
                         </div>
                     </div>
@@ -148,7 +146,7 @@
                     <!-- Imagen -->
                     <div class="form-group">
                         <div class="col-md-4">
-                            <img class="img-fluid" height="200px" width="200px" src="Media/Imagenes/placeholder.png" />
+                            <img id="imagen" class="img-fluid" height="200px" width="200px" src="Media/Imagenes/placeholder.png" />
                         </div>
                     </div>
 
@@ -176,11 +174,12 @@
                             <button id="btnBorrar" name="btnBorrar" class="btn btn-warning">Borrar</button>
                         </div>
                     </div>
+                    <label id="imageString"></label>
 
                 </fieldset>
             </form>
-
         </div>
     </div>
+    <script src="js/habitaciones.js"></script>
 </body>
 </html>
