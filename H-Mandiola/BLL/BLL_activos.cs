@@ -12,6 +12,7 @@ namespace BLL
 {
    public class BLL_activos
     {
+        #region Variables Publicas
         private string _prefijo;
         public string prefijo
         {
@@ -58,6 +59,7 @@ namespace BLL
             get { return _num_error; }
             set { _num_error = value; }
         }
+        #endregion
 
         string CS = "ProyectoMandiolaConnectionString";
         SqlConnection conexion;
