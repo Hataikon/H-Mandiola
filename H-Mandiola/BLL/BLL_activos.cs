@@ -58,5 +58,113 @@ namespace BLL
             get { return _num_error; }
             set { _num_error = value; }
         }
+
+        string CS = "ProyectoMandiolaConnectionString";
+        SqlConnection conexion;
+        string mensaje_error;
+        int numero_error;
+        string sql;
+        DataSet ds;
+
+        public DataSet carga_lista_activos()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.html?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return null;
+            }
+            else
+            {
+                sql = "sp_TRAE_LISTA_ACTIVO";
+                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref mensaje_error, ref numero_error);
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    return null;
+                }
+                else
+                {
+                    return ds;
+                }
+            }
+
+        }
+
+        public bool agregar_activos()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return false;
+            }
+            else
+            {
+                agregar_activos_sub();
+
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return false;
+                }
+                else
+                {
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return true;
+                }
+            }
+        }
+
+        private void agregar_activos_sub()
+        {
+            sql = "sp_AGREGAR_ACTIVO";
+            ParamStruct[] parametros = new ParamStruct[5];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@nombre", SqlDbType.VarChar, _nombre);
+            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+        }
+
+        public bool modificar_activo()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                return false;
+            }
+            else
+            {
+                modificar_activo_sub();
+
+                if (numero_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return false;
+                }
+                else
+                {
+                    cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
+                    return true;
+                }
+            }
+        }
+
+        private void modificar_activo_sub()
+        {
+            sql = "sp_MODIFICAR_ACTIVOS";
+            ParamStruct[] parametros = new ParamStruct[5];
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@nombre", SqlDbType.VarChar, _nombre);
+            cls_DAL.conectar(conexion, ref mensaje_error, ref numero_error);
+            cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref mensaje_error, ref numero_error);
+        }
     }
 }    
