@@ -173,7 +173,7 @@
         window.location.replace("lista_actividades.html");
     });
 
-    $('#btnNuevo').click(function (e) {
+    $('#btnBorrar').click(function (e) {
         e.preventDefault();
         window.location.replace("actividades.html");
     });
