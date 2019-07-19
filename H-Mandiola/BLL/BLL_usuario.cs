@@ -119,7 +119,7 @@ namespace BLL
             conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.html?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=Error_Conectando_a_la_BD");
                 return null;
             }
             else
@@ -128,7 +128,7 @@ namespace BLL
                 ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref mensaje_error, ref numero_error);
                 if (numero_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=Error_Consiguiendo_lista_usuarios");
                     return null;
                 }
                 else
@@ -146,7 +146,7 @@ namespace BLL
             conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=Error_Conectando_a_la_BD");
                 return false;
             }
             else
@@ -155,7 +155,7 @@ namespace BLL
 
                 if (numero_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=error_agregando_usuarios");
                     cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
                     return false;
                 }
@@ -186,7 +186,7 @@ namespace BLL
             conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=Error_Conectando_a_la_BD");
                 return false;
             }
             else
@@ -195,7 +195,7 @@ namespace BLL
 
                 if (numero_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=error_cambiando_contrasena");
                     cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
                     return false;
                 }
@@ -223,7 +223,7 @@ namespace BLL
             conexion = cls_DAL.trae_conexion(CS, ref mensaje_error, ref numero_error);
             if (conexion == null)
             {
-                HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=Error_Conectando_a_la_BD");
                 return false;
             }
             else
@@ -232,7 +232,7 @@ namespace BLL
 
                 if (numero_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + numero_error.ToString() + "&men=" + mensaje_error);
+                    HttpContext.Current.Response.Redirect("error.html?error=" + numero_error.ToString() + "&men=error_actualizando_roles");
                     cls_DAL.desconectar(conexion, ref mensaje_error, ref numero_error);
                     return false;
                 }

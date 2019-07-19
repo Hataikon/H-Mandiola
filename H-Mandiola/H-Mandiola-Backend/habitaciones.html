@@ -109,8 +109,6 @@
                         <label class="col-md-4 control-label" for="consecutivoDropdown">Consecutivo</label>
                         <div class="col-md-4">
                             <select id="consecutivoDropdown" name="consecutivoDropdown" class="form-control">
-                                <option value="1">Option one</option>
-                                <option value="2">Option two</option>
                             </select>
                         </div>
                     </div>
@@ -138,9 +136,9 @@
                         <label class="col-md-4 control-label" for="habitacionDropdown">Descripcion de la Habitacion</label>
                         <div class="col-md-4">
                             <select id="habitacionDropdown" name="habitacionDropdown" class="form-control">
-                                <option value="1">Normal</option>
-                                <option value="2">Deluxe</option>
-                                <option value="3">Condominio</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Deluxe">Deluxe</option>
+                                <option value="Condominio">Condominio</option>
                             </select>
                         </div>
                     </div>
@@ -148,7 +146,7 @@
                     <!-- Imagen -->
                     <div class="form-group">
                         <div class="col-md-4">
-                            <img class="img-fluid" height="200px" width="200px" src="Media/Imagenes/placeholder.png" />
+                            <img id="imagen" class="img-fluid" height="200px" width="200px" src="Media/Imagenes/placeholder.png" />
                         </div>
                     </div>
 
@@ -176,11 +174,12 @@
                             <button id="btnBorrar" name="btnBorrar" class="btn btn-warning">Borrar</button>
                         </div>
                     </div>
+                    <label id="imageString"></label>
 
                 </fieldset>
             </form>
-
         </div>
     </div>
+    <script src="js/habitaciones.js"></script>
 </body>
 </html>

@@ -84,9 +84,16 @@ namespace H_Mandiola_Backend
             objConsecutivos.descripcion = value.Descripcion.ToString();
             objConsecutivos.rango_inicial = value.Rango_Inicial.ToString(); 
             objConsecutivos.rango_final = value.Rango_Final.ToString();
-            objConsecutivos.agregar_consecutivo();
+            if (objConsecutivos.agregar_consecutivo())
+            {
+                return Json(new { msg = "Successfully added " + value.Prefijo.ToString() });
+            }
+            else
+            {
+                return Json(new { msg = "Error " + value.Prefijo.ToString() });
+            }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully added " + value.Prefijo.ToString() }); ;
+
         }
 
         [Route("~/api/Consecutivos/ModificarConsecutivo")]
@@ -98,9 +105,16 @@ namespace H_Mandiola_Backend
             objConsecutivos.descripcion = value.Descripcion.ToString();
             objConsecutivos.rango_inicial = value.Rango_Inicial.ToString();
             objConsecutivos.rango_final = value.Rango_Final.ToString();
-            objConsecutivos.modificar_consecutivo();
+            if (objConsecutivos.modificar_consecutivo())
+            {
+                return Json(new { msg = "0" });
+            }
+            else
+            {
+                return Json(new { msg = "1", numero_error = objConsecutivos.num_error, mensaje_error = objConsecutivos.mensaje });
+            }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
-            return Json(new { msg = "Successfully modified " + value.Prefijo.ToString() + "El valor del RI es "+value.Rango_Inicial }); ;
+            
         }
 
         // PUT api/<controller>/5

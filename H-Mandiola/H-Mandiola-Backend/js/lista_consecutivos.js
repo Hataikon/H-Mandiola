@@ -19,4 +19,9 @@
         });
     };
     cargarDatos();
+
+    $('#btnNuevo').click(function (e) {
+        e.preventDefault();
+        window.location.replace("consecutivos.html");
+    });
 });

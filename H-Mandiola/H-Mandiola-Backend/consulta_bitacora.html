@@ -98,8 +98,25 @@
                     </div>
                 </div>
             </nav>
-            <label>Form Here</label>
+            <input id="usuario" class="searchInput" type="text" placeholder="Usuario">
+            <input id="fi" class="searchInput" type="text" placeholder="Fecha Inicio" />
+            <input id="fn" class="searchInput" type="text" placeholder="Fecha Fin">
+            <input id="tipo" class="searchInput" type="text" placeholder="Tipo">
+            <table id="tbDatos" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo Registro</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
+    <script src="js/consulta_bitacora.js"></script>
 </body>
 </html>

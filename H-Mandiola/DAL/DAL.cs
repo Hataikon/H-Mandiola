@@ -95,7 +95,7 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                mensaje_error = "Error de conexion hacia el servidor de base de datos, informacion adicional: " + ex.Message;
+                mensaje_error = "Error de conexion hacia el servidor de base de datos";
                 numero_error = ex.Number;
             }
         }
