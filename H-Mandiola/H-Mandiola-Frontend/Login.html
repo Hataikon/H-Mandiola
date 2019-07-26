@@ -7,48 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" type="text/css" href="/css/StyleSheet1.css" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="868758027790-58hitviae4hup42a0t37ad2mlu21243r.apps.googleusercontent.com">
 
-    <!--inicio del css para el captcha-->
-    <style>
-        .capbox {
-            background-color: #92D433;
-            border: #B3E272 0px solid;
-            border-width: 0px 12px 0px 0px;
-            display: inline-block;
-            *display: inline;
-            zoom: 1;
-            /* FOR IE7-8 */
-            padding: 8px 40px 8px 8px;
-        }
 
-        .capbox-inner {
-            font: bold 11px arial, sans-serif;
-            color: #000000;
-            background-color: #DBF3BA;
-            margin: 5px auto 0px auto;
-            padding: 3px;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px;
-        }
-
-        #CaptchaDiv {
-            font: bold 17px verdana, arial, sans-serif;
-            font-style: italic;
-            color: #000000;
-            background-color: #FFFFFF;
-            padding: 4px;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px;
-        }
-
-        #CaptchaInput {
-            margin: 1px 0px 1px 0px;
-            width: 135px;
-        }
-    </style>
-    <!--fin del css del captcha-->
 </head>
 
 <body>
@@ -65,7 +27,7 @@
     <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
     <ul>
         <li><a href="Home.html">Inicio</a></li>
         <li><a>Contacto</a></li>
@@ -83,7 +45,7 @@
             <label class="col-md-4 control-label" for="userID">Nombre de usuario:</label>
             <div class="col-md-4">
                 <input id="userID" name="userID" type="text" placeholder="Digite su usuario"
-                    class="form-control input-md">
+                       class="form-control input-md">
 
             </div>
         </div>
@@ -93,7 +55,7 @@
             <label class="col-md-4 control-label" for="passw">Contraseña:</label>
             <div class="col-md-4">
                 <input id="passw" name="passw" type="password" placeholder="Digite su contraseña"
-                    class="form-control input-md">
+                       class="form-control input-md">
 
             </div>
         </div>
@@ -124,11 +86,8 @@
             </div>
         </div>
     </form>
-    <a href="Registro.html">Registrarse</a>
-
-    <script type="text/javascript">
-
-        // Captcha Script
+    <script>
+        // Captcha
 
         function checkform(theform) {
             var why = "";
@@ -173,8 +132,36 @@
             return string.split(' ').join('');
         }
     </script>
+    <a href="Registro.html">Registrarse</a>
+    <br />
     <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-        data-auto-logout-link="false" data-use-continue-as="false"></div>
+         data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <br>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+
+
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log(id_token);
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+
+    </script>
+    <!--google, captcha-->
+
 </body>
 
 </html>
