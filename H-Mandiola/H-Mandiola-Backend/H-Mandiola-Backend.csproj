@@ -145,6 +145,7 @@
     <Content Include="css\login.css" />
     <Content Include="css\simple-sidebar.css" />
     <Content Include="default.html" />
+    <Content Include="detalle_bitacora.html" />
     <Content Include="error.html" />
     <Content Include="estado_cliente.html" />
     <Content Include="favicon.ico" />
@@ -159,6 +160,7 @@
     <Content Include="js\consulta_habitaciones_listas.js" />
     <Content Include="js\crear_usuario.js" />
     <Content Include="js\default.js" />
+    <Content Include="js\detalle_bitacora.js" />
     <Content Include="js\error.js" />
     <Content Include="js\estado_cliente.js" />
     <Content Include="js\habitaciones.js" />

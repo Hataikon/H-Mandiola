@@ -306,7 +306,7 @@ GO
 ------------------------------------------------------------------------------
 
 CREATE TABLE CLIENTES (
-   NOMBRE_USUARIO varchar(20) COLLATE Latin1_General_BIN2 
+   NOMBRE_USUARIO varchar(90) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -434,7 +434,7 @@ CREATE TABLE RESERVACIONES_DE_HABITACIONES (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    ),
-   Cliente VARCHAR(20) COLLATE Latin1_General_BIN2 
+   Cliente VARCHAR(90) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
@@ -493,7 +493,7 @@ go
 ------------------------------------------------------------------------------
 
 CREATE TABLE COMPRAS (
-   Cliente VARCHAR(20) COLLATE Latin1_General_BIN2 
+   Cliente VARCHAR(90) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
