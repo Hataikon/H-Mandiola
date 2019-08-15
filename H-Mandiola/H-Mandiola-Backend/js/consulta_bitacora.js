@@ -17,7 +17,7 @@
             var filas = '';
             data.forEach(function (fila) {
                 filas += '<tr><td>' + fila['Codigo_Registro'] + '</td><td>' + fila['Usuario'] +
-                    '</td><td>' + fila['Fecha_Hora'] + '</td><td>' + fila['Tipo'] + '</td><td>' + fila['Descripcion'] + '</td><td>' + fila['Detalle'] + '</td></tr>';
+                    '</td><td>' + fila['Fecha_Hora'] + '</td><td>' + fila['Tipo'] + '</td><td>' + fila['Descripcion'] + '</td><td><a href=' + 'detalle_bitacora.html?detalle=' + fila['Detalle'] + '>' + "Detalle" + '</a>' + '</td></tr>';
             })
             $('#tbDatos tbody').append(filas);
 
