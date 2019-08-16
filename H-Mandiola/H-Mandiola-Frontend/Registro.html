@@ -19,109 +19,137 @@
         <li><a>Nosotros</a></li>
         <li style="float:right"><a class="active" href="Login.html">Iniciar sesion</a></li>
     </ul>
-    <form class="form-horizontal" onsubmit="return checkform(this);">
-        <!--<fieldset>-->
-        <!-- Form Name -->
-        <legend>
-            <h1>Registro</h1>
-        </legend>
+    <!-- <form class="form-horizontal" onsubmit="return checkform(this);">
+         <fieldset>-->
+    <!-- Form Name
+    <legend>
+        <h1>Registro</h1>
+    </legend>-->
+    <!-- Text input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="nombre">Nombre</label>
+        <div class="col-md-4">
+            <input id="nombre" name="nombre" type="text" placeholder="Digite su nombre"
+                   class="form-control input-md" required="">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="nombre">Nombre</label>
-            <div class="col-md-4">
-                <input id="nombre" name="nombre" type="text" placeholder="Digite su nombre"
-                       class="form-control input-md" required="">
-
-            </div>
         </div>
+    </div>-->
+    <!-- Text input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="apellido1">Primer Apellido</label>
+        <div class="col-md-4">
+            <input id="apellido1" name="apellido1" type="text" placeholder="Digite su primer apellido"
+                   class="form-control input-md" required="">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="apellido1">Primer Apellido</label>
-            <div class="col-md-4">
-                <input id="apellido1" name="apellido1" type="text" placeholder="Digite su primer apellido"
-                       class="form-control input-md" required="">
-
-            </div>
         </div>
+    </div>-->
+    <!-- Text input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="apellido2">Segundo Apellido</label>
+        <div class="col-md-4">
+            <input id="apellido2" name="apellido2" type="text" placeholder="Digite su segundo apellido"
+                   class="form-control input-md">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="apellido2">Segundo Apellido</label>
-            <div class="col-md-4">
-                <input id="apellido2" name="apellido2" type="text" placeholder="Digite su segundo apellido"
-                       class="form-control input-md">
-
-            </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="mail">Correo electrónico</label>
-            <div class="col-md-5">
-                <input id="mail" name="mail" type="text" placeholder="Ingrese su correo electrónico"
-                       class="form-control input-md" required=""> <br>
-                <span class="help-block">Ejemplo: mandiola@gmail.com</span>
-            </div>
+    </div>-->
+    <!-- Text input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="mail">Correo electrónico</label>
+        <div class="col-md-5">
+            <input id="mail" name="mail" type="text" placeholder="Ingrese su correo electrónico"
+                   class="form-control input-md" required=""> <br>
+            <span class="help-block">Ejemplo: mandiola@gmail.com</span>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="userID">Nombre de usuario</label>
-            <div class="col-md-4">
-                <input id="userID" name="userID" type="text" placeholder="Ingrese su usuario"
-                       class="form-control input-md" required=""> <br>
-                <span class="help-block">Ejemplo: hMandiola123</span>
-            </div>
+    </div>-->
+    <!-- Text input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="userID">Nombre de usuario</label>
+        <div class="col-md-4">
+            <input id="userID" name="userID" type="text" placeholder="Ingrese su usuario"
+                   class="form-control input-md" required=""> <br>
+            <span class="help-block">Ejemplo: hMandiola123</span>
         </div>
-
-        <!-- Button -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="verificarUserID"></label>
-            <div class="col-md-4">
-                <button id="verificarUserID" name="verificarUserID" class="btn btn-success">Verificar</button>
-            </div>
+    </div>-->
+    <!-- Button
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="verificarUserID"></label>
+        <div class="col-md-4">
+            <button id="verificarUserID" name="verificarUserID" class="btn btn-success">Verificar</button>
         </div>
-
-        <!-- Password input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="passw">Contraseña</label>
-            <div class="col-md-5">
-                <input id="passw" name="passw" type="password" placeholder="Digite su contrase;a"
-                       class="form-control input-md" required="">
-
-            </div>
+    </div>-->
+    <!-- Password input
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="passw">Contraseña</label>
+        <div class="col-md-5">
+            <input id="passw" name="passw" type="password" placeholder="Digite su contraseña"
+                   class="form-control input-md" required="">
         </div>
+        </div>-->
+    <!-- START CAPTCHA
+    <br>
+    <div class="capbox">
 
-        <!-- START CAPTCHA -->
-        <br>
-        <div class="capbox">
+        <div id="CaptchaDiv"></div>
 
-            <div id="CaptchaDiv"></div>
+        <div class="capbox-inner">
+            Type the above number:<br>
 
-            <div class="capbox-inner">
-                Type the above number:<br>
+            <input type="hidden" id="txtCaptcha">
+            <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
 
-                <input type="hidden" id="txtCaptcha">
-                <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
-
-            </div>
         </div>
-        <br>
-        <br>
-        <!-- END CAPTCHA -->
-        <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="save"></label>
-            <div class="col-md-8">
-                <button id="save" name="save" class="btn btn-success">Guardar</button>
-                <button id="cancel" name="cancel" class="btn btn-danger">Cancelar</button>
-            </div>
+    </div>
+    <br>
+    <br>-->
+    <!-- END CAPTCHA -->
+    <!-- Button (Double)
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="save"></label>
+        <div class="col-md-8">
+            <button id="save" name="save" class="btn btn-success">Guardar</button>
+            <button id="cancel" name="cancel" class="btn btn-danger">Cancelar</button>
         </div>
+    </div>-->
+    <!--</fieldset>
+    </form>-->
 
-        <!--</fieldset>-->
+    <form action="" name="formulario" method="get">
+        <h1>Registro</h1>
+        <br />
+        <label>Nombre</label>
+        <input id="nombre" type="text" name="nombre" placeholder="Digite su nombre" value="" required="" />
+        <br />
+        <label>Primer apellido</label>
+        <input id="apellido1" type="text" name="apellido1" placeholder="Digite su primer apellido" value="" required=""/>
+        <br />
+        <label>Segundo apellido</label>
+        <input id="apellido2" type="text" name="apellido2" placeholder="Digite su segundo apellido" value=""/>
+        <br />
+        <label>Correo electronico</label>
+        <input id="mail" type="text" name="mail" placeholder="Digite su email" value="" required="" />
+        <br />
+        <label>Nombre de usuario</label>
+        <input id="userID" type="text" name="userID" placeholder="Agregue un nombre de usuario" value="" required="" />
+        <br />
+        <label>Contraseña</label>
+        <input id="passw" type="password" name="passw" placeholder="Digite su contraseña" value="" required="" />
+        <br />
+        <input type="submit" id="btn" name="btn" value="Enviar" />
     </form>
+    
+    
+    
+    <script>
+        //script de guardar formulario
+        (function () {
+            var formulario = document.getElementsByName('formulario')[0],
+                elementos = formulario.elements,
+                boton = document.getElementById('btn');
+
+            
+        }());
+    </script>
+
 
     <script type="text/javascript">
 
@@ -170,8 +198,6 @@
             return string.split(' ').join('');
         }
     </script>
-
-
 </body>
 
 </html>
