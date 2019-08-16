@@ -81,7 +81,10 @@
     <Content Include="css\login.css" />
     <Content Include="css\StyleSheet1.css" />
     <Content Include="Home.html" />
+    <Content Include="js\Compra_Articulos.js" />
     <Content Include="js\login.js" />
+    <Content Include="js\Reservaciones_Pagadas.js" />
+    <Content Include="js\Reservacion_Npagadas.js" />
     <Content Include="Lobby.html" />
     <Content Include="Login.html" />
     <Content Include="Registro.html" />
