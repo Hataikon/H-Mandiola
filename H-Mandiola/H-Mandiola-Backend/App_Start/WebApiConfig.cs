@@ -9,6 +9,7 @@ namespace H_Mandiola_Backend
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
             // Web API configuration and services
 
             // Web API routes

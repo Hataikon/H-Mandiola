@@ -7,237 +7,76 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" type="text/css" href="/css/StyleSheet1.css" />
+    <link href="css/login.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="google-signin-client_id" content="1072392383551-29kdof31c9s5uv1q386r3qcs58digbl7.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="868758027790-58hitviae4hup42a0t37ad2mlu21243r.apps.googleusercontent.com">
 </head>
 <body>
+    <ul>
+        <li><a class="active" href="Home.html">Inicio</a></li>
+        <li><a href="https://localhost:44331/login.aspx"> Administracion </a></li>
+        <li><a href="Login.html">Iniciar sesion</a></li>
+        <li><a href="Lobby.html">Contacto</a></li>
+        <li><a>Nosotros</a></li>
+    </ul>
 
     <!--facebook-->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v4.0"></script>
-    <script>
-        // This is called with the results from from FB.getLoginStatus().
-        function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
-            // The response object is returned with a status field that lets the
-            // app know the current login status of the person.
-            // Full docs on the response object can be found in the documentation
-            // for FB.getLoginStatus().
-            if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-                testAPI();
-            } else {
-                // The person is not logged into your app or we are unable to tell.
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this app.';
-            }
-        }
 
-        // This function is called when someone finishes with the Login
-        // Button.  See the onlogin handler attached to it in the sample
-        // code below.
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '2094128197556660',
-                cookie: true,  // enable cookies to allow the server to access
-                // the session
-                xfbml: true,  // parse social plugins on this page
-                version: 'v3.3' // The Graph API version to use for the call
-            });
-
-            // Now that we've initialized the JavaScript SDK, we call
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
-
-            FB.Login(function (response) {
-                if (response.authResponse) {
-                    var access_token = FB.getAuthResponse()['accessToken'];
-                    console.log('Access Token = ' + access_token);
-                    FB.api('/me', function (response) {
-                        console.log('Good to see you, ' + response.name + '.');
-                    });
-                } else {
-                    console.log('User cancelled login or did not fully authorize.');
-                }
-            }, { scope: '' });
-        };
-
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        // Here we run a very simple test of the Graph API after login is
-        // successful.  See statusChangeCallback() for when this call is made.
-        function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function (response) {
-                console.log('Successful login for: ' + response.name);
-                document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
-            });
-        }
-
-/**/</script>
     <!--facebook-->
-
-    <ul>
-        <li><a href="Home.html">Inicio</a></li>
-        <li><a>Contacto</a></li>
-        <li><a>Nosotros</a></li>
-    </ul>
     <form class="form-horizontal" onsubmit="return checkform(this);">
 
-        <!-- Form Name -->
-        <legend>
-            <h3>Inicio de sesión</h3>
-        </legend>
+        <div class="login-form">
+            <form>
+                <h2 class="text-center">Inicio de sesión</h2>
+                <div class="form-group">
+                    <input id="usernameBox" name="usernameBox" type="text" class="form-control" placeholder="Username" required="required">
+                </div>
+                <div class="form-group">
+                    <input id="passwordBox" name="passwordBox" type="password" class="form-control" placeholder="Password" required="required">
+                </div>
+                <!-- START CAPTCHA -->
+                <div class="capbox">
 
-        <!-- Text input-->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="userID">Nombre de usuario:</label>
-            <div class="col-md-4">
-                <input id="userID" name="userID" type="text" placeholder="Digite su usuario"
-                       class="form-control input-md">
+                    <div id="CaptchaDiv"></div>
 
-            </div>
-        </div>
+                    <div class="capbox-inner">
+                        Type the above number:<br>
 
-        <!-- Password -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="passw">Contraseña:</label>
-            <div class="col-md-4">
-                <input id="passw" name="passw" type="password" placeholder="Digite su contraseña"
-                       class="form-control input-md">
+                        <input type="hidden" id="txtCaptcha">
+                        <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
 
-            </div>
-        </div>
-
-        <!-- START CAPTCHA -->
-        <br>
-        <div class="capbox">
-
-            <div id="CaptchaDiv"></div>
-
-            <div class="capbox-inner">
-                Type the above number:<br>
-
-                <input type="hidden" id="txtCaptcha">
-                <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
-
-            </div>
-        </div>
-        <br>
-        <br>
-        <!-- END CAPTCHA -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="inicioSesion"></label>
-            <div class="col-md-4">
-                <button id="inicioSesion" name="inicioSesion" class="btn btn-primary">Iniciar sesión</button>
-
-            </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <!-- END CAPTCHA -->
+                <div class="form-group">
+                    <button id="btnAceptar" type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                </div>
+                <label>Iniciar sesion con red social</label>
+                <div class="row">
+                    <div class="col">
+                        <fb:login-button scope="public_profile,email" onlogin="window.location ='https://localhost:44387/Reservaciones_Pagadas.html'" data-width="200" data-size="medium" data-auto-logout-link="true">
+                        </fb:login-button>  <!--checkLoginState();-->
+                        <div id="status">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <a href="#" onclick="signOut();">Sign out</a>
+                    </div>
+                </div>
+                <a href="Registro.html">Registrarse</a>
+            </form>
         </div>
     </form>
-
-    <!--Inicio Captcha-->
-    <script>
-        function checkform(theform) {
-            var why = "";
-
-            if (theform.CaptchaInput.value == "") {
-                why += "- Please Enter CAPTCHA Code.\n";
-            }
-            if (theform.CaptchaInput.value != "") {
-                if (ValidCaptcha(theform.CaptchaInput.value) == false) {
-                    why += "- The CAPTCHA Code Does Not Match.\n";
-                }
-            }
-            if (why != "") {
-                alert(why);
-                return false;
-            }
-        }
-
-        var a = Math.ceil(Math.random() * 9) + '';
-        var b = Math.ceil(Math.random() * 9) + '';
-        var c = Math.ceil(Math.random() * 9) + '';
-        var d = Math.ceil(Math.random() * 9) + '';
-        var e = Math.ceil(Math.random() * 9) + '';
-
-        var code = a + b + c + d + e;
-        document.getElementById("txtCaptcha").value = code;
-        document.getElementById("CaptchaDiv").innerHTML = code;
-
-        // Validate input against the generated number
-        function ValidCaptcha() {
-            var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
-            var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
-            if (str1 == str2) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        // Remove the spaces from the entered and generated code
-        function removeSpaces(string) {
-            return string.split(' ').join('');
-        }
-    </script>
-    <!--Fin de captcha-->
-
-
-    <a href="Registro.html">Registrarse</a>
-    <br />
-    <fb:login-button scope="public_profile,email" onlogin="window.location ='https://localhost:44387/Reservaciones_Pagadas.html'" data-width="200" data-size="medium" data-auto-logout-link="true">
-    </fb:login-button>  <!--checkLoginState();-->
-    <div id="status">
-    </div>
-    <br>
-
-    <br>
-    <div class="g-signin2" data-onsuccess="onSignIn" href="https://localhost:44387/Reservaciones_Pagadas.html"></div>
-    <a href="https://localhost:44387/Home.html" onclick="signOut();">Sign out</a>
-
-    <!--Google-->
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log(id_token);
-        }
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
-    </script>
-    <!--fin Google-->
+    <script src="js/login.js"></script>
 </body>
 
 </html>
