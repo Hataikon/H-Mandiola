@@ -1,17 +1,9 @@
 ﻿$(document).ready(function () {
+    gapi.load('auth2', function () {
+        gapi.auth2.init();
+    });
+    
 
-    function getCookie(name) {
-        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
-    };
-
-    $("#usernameNavBar").text(getCookie("username"));
-    console.log(getCookie("isAdmin"));
-    //if ((getCookie("isAdmin") == "" || getCookie.("isAdmin") == " ") && (getCookie("isSeguridad") == "" || getCookie("isSeguridad") == " ")) {
-    if (getCookie("isAdmin") == "" && getCookie("isSeguridad") == "") {
-        alert("Ud no posee los permisos necesarios para acceder a esta pagina. Por favor contactar al administrador del sitio para solicitarlos");
-        window.location.replace("default.html");
-    }
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
         var Itinerario = $('#itinerario').val();
@@ -41,4 +33,24 @@
 
 
     })
-})
+});
+
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+};
+
+function signOut() {
+    if (getCookie("username") == "google") {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+            document.cookie = "username=;path=/";
+            location.href = 'Home.html';
+        });
+    }
+    else {
+        document.cookie = "username=;path=/";
+        location.href = 'Home.html';
+    }
+}

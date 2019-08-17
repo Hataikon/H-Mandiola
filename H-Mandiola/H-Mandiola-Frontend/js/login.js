@@ -1,4 +1,15 @@
 ﻿$(document).ready(function () {
+    function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+    };
+
+    if (getCookie("username") != 0) {
+        location.href = 'Reservaciones_Pagadas.html';
+    }
+    else {
+        document.cookie = "username=;path=/";
+    }
 
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
@@ -10,6 +21,7 @@
                 alert("El usuario o la contraseña es erronea, por favor intente otra vez");
             }
             else {
+                document.cookie = "username=" + data["Username"] + ";path=/";
                 window.location.replace("Reservaciones_Pagadas.html");
             }
             console.log(data);
@@ -72,6 +84,7 @@ function onSignIn(googleUser) {
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     var id_token = googleUser.getAuthResponse().id_token;
     console.log(id_token);
+    document.cookie = "username=google;path=/";
     console.log("Redirecting...")
     location.href = 'Reservaciones_Pagadas.html';
 }
