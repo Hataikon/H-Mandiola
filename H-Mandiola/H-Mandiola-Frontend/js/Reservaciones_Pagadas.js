@@ -2,7 +2,7 @@
     gapi.load('auth2', function () {
         gapi.auth2.init();
     });
-    
+
 
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
@@ -39,6 +39,68 @@ function getCookie(name) {
     var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return v ? v[2] : null;
 };
+
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '325295755065651',
+        cookie: true,
+        xfbml: true,
+        version: 'v3.3'
+    });
+
+    // Now that we've initialized the JavaScript SDK, we call
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
+
+    FB.Login(function (response) {
+        if (response.authResponse) {
+            var access_token = FB.getAuthResponse()['accessToken'];
+            console.log('Access Token = ' + access_token);
+            FB.api('/me', function (response) {
+                console.log('Good to see you, ' + response.name + '.');
+            });
+        } else {
+            console.log('User cancelled login or did not fully authorize.');
+        }
+    }, { scope: '' });
+};
+
+// Load the SDK asynchronously
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Here we run a very simple test of the Graph API after login is
+// successful.  See statusChangeCallback() for when this call is made.
+function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function (response) {
+        console.log('Successful login for: ' + response.name);
+        document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+    });
+}
+
+function handleSessionResponse(response) {
+    //if we dont have a session (which means the user has been logged out, redirect the user)
+    if (!response.session) {
+        window.location = "Login.html";
+        return;
+    }
+}
+
 
 function signOut() {
     if (getCookie("username") == "google") {

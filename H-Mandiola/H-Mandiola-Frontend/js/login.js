@@ -22,7 +22,13 @@
             }
             else {
                 document.cookie = "username=" + data["Username"] + ";path=/";
-                window.location.replace("Reservaciones_Pagadas.html");
+                if (ValidCaptcha()) {
+                    window.location.replace("Reservaciones_Pagadas.html");
+                }
+                else {
+                    alert("El captcha es incorrecto");
+                }
+                
             }
             console.log(data);
         });
@@ -175,4 +181,10 @@ function testAPI() {
         document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
     });
+}
+
+function AddCookieFB() {
+    document.cookie = "username=facebook;path=/";
+    document.cookie = "token=" + FB.getAccessToken() + ";path=/";
+    location.href = 'Reservaciones_Pagadas.html';
 }

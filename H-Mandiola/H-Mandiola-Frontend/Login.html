@@ -17,9 +17,8 @@
 </head>
 <body>
     <ul>
-        <li><a class="active" href="Home.html">Inicio</a></li>
+        <li><a class="active" href="Login.html">Iniciar sesion</a></li>
         <li><a href="https://localhost:44331/login.aspx"> Administracion </a></li>
-        <li><a href="Login.html">Iniciar sesion</a></li>
         <li><a href="Lobby.html">Contacto</a></li>
         <li><a>Nosotros</a></li>
     </ul>
@@ -62,14 +61,13 @@
                 <label>Iniciar sesion con red social</label>
                 <div class="row">
                     <div class="col">
-                        <fb:login-button scope="public_profile,email" onlogin="window.location ='https://localhost:44387/Reservaciones_Pagadas.html'" data-width="200" data-size="medium" data-auto-logout-link="true">
+                        <fb:login-button scope="public_profile,email" onlogin="AddCookieFB()" data-width="200" data-size="medium" data-auto-logout-link="true">
                         </fb:login-button>  <!--checkLoginState();-->
                         <div id="status">
                         </div>
                     </div>
                     <div class="col">
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                        <a href="#" onclick="signOut();">Sign out</a>
                     </div>
                 </div>
                 <a href="Registro.html">Registrarse</a>
