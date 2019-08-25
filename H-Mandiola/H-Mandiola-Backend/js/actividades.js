@@ -80,6 +80,7 @@
             var Descripcion = $('#descripcionBox').val();;
             var Imagen = $('#imagen').attr('src');
             resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Nombre: Nombre, Descripcion: Descripcion, Imagen: Imagen });
+            console.log(resJSON);
             $.ajax({
                 type: "post",
                 url: "api/Actividades/ModificarActividad",
@@ -88,7 +89,6 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
-                    alert(response.msg)
                 },
                 error: function (response) {
                     console.log(response);
@@ -113,6 +113,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
+                    window.location.replace("lista_actividades.html");
                 },
 
                 error: function (response) {
@@ -124,11 +125,13 @@
         }
         else {
             var Codigo_Consecutivo = $('#codigoBox').val();
+            console.log(Codigo_Consecutivo);
             var Prefijo = Codigo_Consecutivo.substring(0, Codigo_Consecutivo.indexOf('-'));
             var Nombre = $('#nombreBox').val();
             var Descripcion = $('#descripcionBox').val();
             var Imagen = $('#imagen').attr('src');
             resJSON = JSON.stringify({ Codigo_Consecutivo: Codigo_Consecutivo, Prefijo: Prefijo, Nombre: Nombre, Descripcion: Descripcion, Imagen: Imagen });
+            console.log(resJSON);
             $.ajax({
                 type: "post",
                 url: "api/Actividades/AgregarActividad",
@@ -137,7 +140,6 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
-                    alert(response.msg)
                 },
                 error: function (response) {
                     console.log(response);
@@ -162,6 +164,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
+                    window.location.replace("lista_actividades.html");
                 },
 
                 error: function (response) {

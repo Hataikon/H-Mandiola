@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------------------------
 ---------------------------------------CONSECUTIVOS-----------------------------------
 --------------------------------------------------------------------------------------------------
+USE ProyectoMandiola
 
 IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_AGREGAR_CONSECUTIVO]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 BEGIN 
@@ -12,8 +13,8 @@ CREATE PROCEDURE [dbo].[sp_AGREGAR_CONSECUTIVO]
 ( @prefijo char(5),
   @consecutivo NVARCHAR(10),
   @descripcion varchar(MAX),
-  @ri NVARCHAR(10),
-  @rf NVARCHAR(10))
+  @ri VARCHAR(10),
+  @rf VARCHAR(10))
 
  AS
 
@@ -48,8 +49,8 @@ CREATE PROCEDURE [dbo].[sp_MODIFICAR_CONSECUTIVO]
 ( @prefijo char(5),
   @consecutivo NVARCHAR(10),
   @descripcion varchar(MAX),
-  @ri NVARCHAR(10),
-  @rf NVARCHAR(10))
+  @ri VARCHAR(10),
+  @rf VARCHAR(10))
 
 AS
 
@@ -60,6 +61,18 @@ SET PREFIJO = @prefijo,
 	RANGO_INICIAL = @ri,
 	RANGO_FINAL = @rf
 WHERE PREFIJO = @prefijo
+GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_MAXIMO_CONSECUTIVO]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN 
+DROP PROCEDURE [dbo].[sp_MAXIMO_CONSECUTIVO]
+END 
+GO
+CREATE PROCEDURE [dbo].[sp_MAXIMO_CONSECUTIVO]
+
+AS
+
+SELECT MAX(Row_Num)+1 AS ID FROM CONSECUTIVOS
 GO
 
 --------------------------------------------------------------------------------------------------

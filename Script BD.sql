@@ -196,6 +196,7 @@ go
 /*                         TABLE                                */
 /*==============================================================*/
 CREATE TABLE CONSECUTIVOS (
+   Row_Num INT NOT NULL IDENTITY(1,1),
    PREFIJO CHAR(5) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
@@ -214,18 +215,18 @@ CREATE TABLE CONSECUTIVOS (
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
    )not null,
-   RANGO_INICIAL NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   RANGO_INICIAL VARCHAR(10) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   )not null,
-   RANGO_FINAL NVARCHAR(10) COLLATE Latin1_General_BIN2 
+   ),
+   RANGO_FINAL VARCHAR(10) COLLATE Latin1_General_BIN2 
    ENCRYPTED WITH (
 	COLUMN_ENCRYPTION_KEY = CEK1,
 	ENCRYPTION_TYPE = Deterministic,
 	ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-   )not null
+   )
 )
 GO
 

@@ -137,8 +137,8 @@ namespace BLL
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.VarChar, _rango_inicial);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.VarChar, _rango_final);
             cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
         }
@@ -176,11 +176,45 @@ namespace BLL
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 0, "@prefijo", SqlDbType.Char, _prefijo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 1, "@consecutivo", SqlDbType.NVarChar, _codigo_consecutivo);
             cls_DAL.agregar_datos_estructura_parametros(ref parametros, 2, "@descripcion", SqlDbType.VarChar, _descripcion);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.NVarChar, _rango_inicial);
-            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.NVarChar, _rango_final);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 3, "@ri", SqlDbType.VarChar, _rango_inicial);
+            cls_DAL.agregar_datos_estructura_parametros(ref parametros, 4, "@rf", SqlDbType.VarChar, _rango_final);
             cls_DAL.conectar(conexion, ref _mensaje, ref _num_error);
             cls_DAL.ejecuta_sqlcommand(conexion, sql, true, parametros, ref _mensaje, ref _num_error);
         }
+
+        public void maximo_consecutivo()
+        {
+            conexion = cls_DAL.trae_conexion(CS, ref _mensaje, ref _num_error);
+            if (conexion == null)
+            {
+                HttpContext.Current.Response.Redirect("Error.aspx?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
+            }
+            else
+            {
+                sql = "sp_MAXIMO_CONSECUTIVO";
+                ds = cls_DAL.ejecuta_dataset(conexion, sql, true, ref _mensaje, ref _num_error);
+                if (_num_error != 0)
+                {
+                    HttpContext.Current.Response.Redirect("Error.aspx?error=" + _num_error.ToString() + "&men=Error_Conectando_A_la_BD");
+                }
+                else
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["ID"] != DBNull.Value)
+                        {
+                            _prefijo = ds.Tables[0].Rows[0]["ID"].ToString();
+                        }
+                        else
+                        {
+                            _prefijo = "1";
+                        }
+
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 }

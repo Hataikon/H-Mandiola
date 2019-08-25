@@ -88,7 +88,6 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
-                    alert(response.msg)
                 },
                 error: function (response) {
                     console.log(response);
@@ -113,6 +112,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
+                    window.location.replace("lista_habitaciones.html");
                 },
 
                 error: function (response) {
@@ -137,7 +137,6 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
-                    alert(response.msg)
                 },
                 error: function (response) {
                     console.log(response);
@@ -162,6 +161,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     console.log(response.msg)
+                    window.location.replace("lista_habitaciones.html");
                 },
 
                 error: function (response) {

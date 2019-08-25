@@ -117,6 +117,20 @@ namespace H_Mandiola_Backend
             
         }
 
+
+        [Route("~/api/Consecutivos/MaxConsecutivo")]
+        [HttpGet]
+        public Consecutivos MaxConsecutivo()
+        {
+            objConsecutivos.maximo_consecutivo();
+
+            Consecutivos result =  new Consecutivos();
+
+            result.Row_Num = objConsecutivos.prefijo;
+
+            return result;
+        }
+
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
         {
