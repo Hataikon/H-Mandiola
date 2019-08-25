@@ -443,6 +443,66 @@ WHERE NOMBRE_USUARIO = @username
 GO
 
 --------------------------------------------------------------------------------------------------
+---------------------------------------CLIENTES---------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_AGREGAR_CLIENTE]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN 
+DROP PROCEDURE [dbo].sp_AGREGAR_CLIENTE 
+END 
+GO
+
+CREATE PROCEDURE [dbo].sp_AGREGAR_CLIENTE
+( @username VARCHAR(90),
+  @password VARCHAR(12),
+  @email VARCHAR(60),
+  @nombre VARCHAR(20),
+  @primer_apellido VARCHAR(20),
+  @segundo_apellido VARCHAR(20))
+
+ AS
+
+Insert into CLIENTES(NOMBRE_USUARIO,PASSWORD,EMAIL,NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) 
+values(@username,@password,@email,@nombre,@primer_apellido, @segundo_apellido)
+GO
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_TRAE_LISTA_CLIENTES]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN 
+DROP PROCEDURE [dbo].sp_TRAE_LISTA_CLIENTES
+END 
+GO
+CREATE PROCEDURE [dbo].sp_TRAE_LISTA_CLIENTES
+
+AS
+
+SELECT NOMBRE_USUARIO
+, PASSWORD
+, NOMBRE
+, PRIMER_APELLIDO
+, SEGUNDO_APELLIDO
+, EMAIL
+FROM CLIENTES
+GO
+
+
+IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[dbo].[sp_CAMBIAR_CONTRASEÑA_CLIENTE]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+BEGIN 
+DROP PROCEDURE [dbo].sp_CAMBIAR_CONTRASEÑA_CLIENTE 
+END 
+GO
+
+CREATE PROCEDURE [dbo].sp_CAMBIAR_CONTRASEÑA_CLIENTE 
+( @username VARCHAR(20),
+  @password VARCHAR(12))
+
+AS
+
+UPDATE CLIENTES
+SET PASSWORD = @password
+WHERE NOMBRE_USUARIO = @username
+GO
+
+--------------------------------------------------------------------------------------------------
 ---------------------------------------BITACORA--------------------------------------------
 --------------------------------------------------------------------------------------------------
 

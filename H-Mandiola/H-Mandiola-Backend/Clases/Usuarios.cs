@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace H_Mandiola_Backend
+namespace H_Mandiola_Backend.Clases
 {
     public class Usuarios
     {

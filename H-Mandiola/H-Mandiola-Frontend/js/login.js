@@ -5,33 +5,43 @@
     };
 
     if (getCookie("username") != 0) {
-        location.href = 'Reservaciones_Pagadas.html';
+        location.href = 'Home.html';
     }
     else {
         document.cookie = "username=;path=/";
     }
 
+    var a = Math.ceil(Math.random() * 9) + '';
+    var b = Math.ceil(Math.random() * 9) + '';
+    var c = Math.ceil(Math.random() * 9) + '';
+    var d = Math.ceil(Math.random() * 9) + '';
+    var e = Math.ceil(Math.random() * 9) + '';
+
+    var code = a + b + c + d + e;
+    document.getElementById("txtCaptcha").value = code;
+    document.getElementById("CaptchaDiv").innerHTML = code;
+
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
         var username = $('#usernameBox').val();
         var password = $('#passwordBox').val();
-        $.getJSON("https://localhost:44331/api/Usuarios/BuscarUsuario?username=" + username + "&password=" + password, function (data) {
-            console.log("/api/Usuarios/BuscarUsuario?username=" + username + "&password=" + password);
-            if (data == null) {
-                alert("El usuario o la contraseña es erronea, por favor intente otra vez");
-            }
-            else {
-                document.cookie = "username=" + data["Username"] + ";path=/";
-                if (ValidCaptcha()) {
-                    window.location.replace("Reservaciones_Pagadas.html");
+        if (ValidCaptcha()) {
+            $.getJSON("https://localhost:44331/api/Cliente/BuscarCliente?username=" + username + "&password=" + password, function (data) {
+                console.log("/api/Usuarios/BuscarUsuario?username=" + username + "&password=" + password);
+                if (data == null) {
+                    alert("El usuario o la contraseña es erronea, por favor intente otra vez");
                 }
                 else {
-                    alert("El captcha es incorrecto");
+                    document.cookie = "username=" + data["Username"] + ";path=/";
+                    window.location.replace("Home.html");
                 }
-                
-            }
-            console.log(data);
-        });
+                console.log(data);
+            });
+        }
+        else {
+            alert("Captcha Incorrecto");
+            changeCaptchaVal();
+        }
     });
 
 });
@@ -55,16 +65,17 @@ function checkform(theform) {
     }
 }
 
-var a = Math.ceil(Math.random() * 9) + '';
-var b = Math.ceil(Math.random() * 9) + '';
-var c = Math.ceil(Math.random() * 9) + '';
-var d = Math.ceil(Math.random() * 9) + '';
-var e = Math.ceil(Math.random() * 9) + '';
+function changeCaptchaVal() {
+    var a = Math.ceil(Math.random() * 9) + '';
+    var b = Math.ceil(Math.random() * 9) + '';
+    var c = Math.ceil(Math.random() * 9) + '';
+    var d = Math.ceil(Math.random() * 9) + '';
+    var e = Math.ceil(Math.random() * 9) + '';
 
-var code = a + b + c + d + e;
-document.getElementById("txtCaptcha").value = code;
-document.getElementById("CaptchaDiv").innerHTML = code;
-
+    var code = a + b + c + d + e;
+    document.getElementById("txtCaptcha").value = code;
+    document.getElementById("CaptchaDiv").innerHTML = code;
+}
 // Validate input against the generated number
 function ValidCaptcha() {
     var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
@@ -92,7 +103,7 @@ function onSignIn(googleUser) {
     console.log(id_token);
     document.cookie = "username=google;path=/";
     console.log("Redirecting...")
-    location.href = 'Reservaciones_Pagadas.html';
+    location.href = 'Home.html';
 }
 
 function signOut() {
@@ -103,29 +114,18 @@ function signOut() {
 }
 
 //Facebook Stuff
-// This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response) {
+function statusChangeCallback(response) {  
     console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-        // Logged into your app and Facebook.
+    console.log(response);                   
+    if (response.status === 'connected') {   
         testAPI();
     } else {
-        // The person is not logged into your app or we are unable to tell.
-        document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
     }
 }
 
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
-function checkLoginState() {
-    FB.getLoginStatus(function (response) {
+
+function checkLoginState() {               
+    FB.getLoginStatus(function (response) {  
         statusChangeCallback(response);
     });
 }
@@ -135,36 +135,15 @@ window.fbAsyncInit = function () {
         appId: '325295755065651',
         cookie: true,
         xfbml: true,
-        version: 'v3.3'
+        version: 'v4.0'
     });
 
-    // Now that we've initialized the JavaScript SDK, we call
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
-
-    FB.Login(function (response) {
-        if (response.authResponse) {
-            var access_token = FB.getAuthResponse()['accessToken'];
-            console.log('Access Token = ' + access_token);
-            FB.api('/me', function (response) {
-                console.log('Good to see you, ' + response.name + '.');
-            });
-        } else {
-            console.log('User cancelled login or did not fully authorize.');
-        }
-    }, { scope: '' });
+    FB.getLoginStatus(function (response) {  
+        statusChangeCallback(response);        
+    });
 };
 
-// Load the SDK asynchronously
-(function (d, s, id) {
+(function (d, s, id) {                      
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
@@ -172,19 +151,17 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
+
+function testAPI() {                      
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function (response) {
         console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
+        AddCookieFB();
     });
 }
 
 function AddCookieFB() {
     document.cookie = "username=facebook;path=/";
     document.cookie = "token=" + FB.getAccessToken() + ";path=/";
-    location.href = 'Reservaciones_Pagadas.html';
+    location.href = 'Home.html';
 }

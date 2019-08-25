@@ -7,8 +7,11 @@ using System.Net.Http;
 using System.Web.Http;
 using BLL;
 using System.Web.Http.Cors;
+using H_Mandiola_Backend.Clases;
 
-namespace H_Mandiola_Backend.Controllers
+
+
+namespace H_Mandiola_Backend
 {
     public class UsuariosController : ApiController
     {
@@ -112,7 +115,7 @@ namespace H_Mandiola_Backend.Controllers
             objUsuario.password = value.Password.ToString();
             if (objUsuario.cambiar_contraseña())
             {
-                return Json(new { msg = "Successfully added " + value.Username.ToString() });
+                return Json(new { msg = "Successfully changed password for user: " + value.Username.ToString() });
             }
             else
             {
