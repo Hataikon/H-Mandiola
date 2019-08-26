@@ -11,55 +11,39 @@
         window.location.replace("default.html");
     }
 
-    var cargarDatos = function () {
-        $.getJSON("/api/Error", function (data) {
-            console.log(data);
-            var filas = '';
-            data.forEach(function (fila) {
-                filas += '<tr><td>' + fila['Numero_Error'] + '</td><td>' + fila['Mensaje_Error'] +
-                    '</td><td>' + fila['Fecha_Error'] + '</td></tr>';
-            })
-            $('#tbDatos tbody').append(filas);
-
-        });
-    };
-    cargarDatos();
-
-    $(".searchInput").on("input", function () {
-        var from = stringToDate($("#desde").val());
-        var to = stringToDate($("#hasta").val());
-
-        $("#tbDatos tr").each(function () {
-            var row = $(this);
-            var date = stringToDate(row.find("td").eq(2).text());
-
-            //show all rows by default
-            var show = true;
-
-            //if from date is valid and row date is less than from date, hide the row
-            if (from && date < from)
-                show = false;
-
-            //if to date is valid and row date is greater than to date, hide the row
-            if (to && date > to)
-                show = false;
-
-            if (show)
-                row.show();
-            else
-                row.hide();
-        });
+    $('#tbDatos').DataTable({
+        columns: [
+            { data: 'Numero_Error' },
+            { data: 'Mensaje_Error' },
+            { data: 'Fecha_Error' }
+        ],
+        ajax: {
+            url: "/api/Error",
+            dataSrc: ''
+        }
     });
 
-    //parse entered date. return NaN if invalid
-    function stringToDate(s) {
-        var ret = NaN;
-        var parts = s.split("/");
-        date = new Date(parts[2], parts[0], parts[1]);
-        if (!isNaN(date.getTime())) {
-            ret = date;
+    $.fn.dataTable.ext.search.push(
+        function (settings, data, dataIndex) {
+            var min = $('#min').datepicker("getDate");
+            var max = $('#max').datepicker("getDate");
+            var Fecha = new Date(data[2]);
+            if (min == null && max == null) { return true; }
+            if (min == null && Fecha <= max) { return true; }
+            if (max == null && Fecha >= min) { return true; }
+            if (Fecha <= max && Fecha >= min) { return true; }
+            return false;
         }
-        return ret;
-    }
+    );
+
+
+    $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+    $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
+    var table = $('#example').DataTable();
+
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min, #max').change(function () {
+        table.draw();
+    });
 
 });

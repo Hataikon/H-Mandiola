@@ -15,7 +15,7 @@ namespace H_Mandiola_Backend
 
         [Route("~/api/Bitacora")]
         [HttpGet]
-        public IEnumerable<Bitacora> GetAll()
+        public List<Bitacora> GetAll()
         {
             DataSet ds = objBitacora.carga_lista_bitacora();
             DataTable dt = ds.Tables[0];
@@ -30,10 +30,9 @@ namespace H_Mandiola_Backend
                 {
                     Codigo_Registro = Convert.ToString(row["CODIGO_REGISTRO"]),
                     Usuario = Convert.ToString(row["USUARIO"]),
-                    Fecha_Hora = Convert.ToString(row["FECHA_HORA_BITACORA"]),
+                    Fecha_Hora = DateTime.Parse(Convert.ToString(row["FECHA_HORA_BITACORA"])).ToString("MM/dd/yyyy"),
                     Tipo = Convert.ToString(row["TIPO"]),
-                    Descripcion = Convert.ToString(row["DESCRIPCION"]),
-                    Detalle = Convert.ToString(row["REGISTRO_DETALLE"])
+                    Descripcion = Convert.ToString(row["DESCRIPCION"])
                 };
 
                 retList.Add(temp);
