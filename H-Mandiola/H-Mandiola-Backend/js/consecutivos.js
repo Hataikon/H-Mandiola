@@ -84,14 +84,40 @@
             var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
             console.log(resJSON);
             if ($('#riBox').prop("disabled")) {
-                ModificarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final);
+                $.ajax({
+                    type: "post",
+                    url: "api/Consecutivos/ModificarConsecutivo",
+                    data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.msg);
+                        AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Modificar");
+                    },
 
-                AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Modificar");
+                    error: function (response) {
+                        console.log(response);
+                        window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                    }
+                });
             }
             else if (parseInt(CODIGO_CONSECUTIVO) >= parseInt(Rango_Inicial) && parseInt(CODIGO_CONSECUTIVO) <= parseInt(Rango_Final)) {
-                ModificarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final);
+                $.ajax({
+                    type: "post",
+                    url: "api/Consecutivos/ModificarConsecutivo",
+                    data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.msg);
+                        AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Modificar");
+                    },
 
-                AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Modificar");
+                    error: function (response) {
+                        console.log(response);
+                        window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                    }
+                });
             }
             else {
                 alert("El Consecutivo debe estar entre el rango inicial y final")
@@ -107,15 +133,38 @@
             var resJSON = JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final });
             console.log(resJSON);
             if ($('#riBox').prop("disabled")) {
-                AgregarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final);
-
-                AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Agregar");
+                $.ajax({
+                    type: "post",
+                    url: "api/Consecutivos/AgregarConsecutivo",
+                    data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.msg);
+                        AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Agregar");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                    }
+                });
             }
             else if (parseInt(CODIGO_CONSECUTIVO) >= parseInt(Rango_Inicial) && parseInt(CODIGO_CONSECUTIVO) <= parseInt(Rango_Final)) {
-
-                AgregarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final);
-
-                AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Agregar");
+                $.ajax({
+                    type: "post",
+                    url: "api/Consecutivos/AgregarConsecutivo",
+                    data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response.msg);
+                        AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, "Agregar");
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
+                    }
+                });
             }
             else {
                 alert("El Consecutivo debe estar entre el rango inicial y final")
@@ -155,41 +204,6 @@ function getUrlParam(parameter, defaultvalue) {
     }
     return urlparameter;
 };
-
-function AgregarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final) {
-    $.ajax({
-        type: "post",
-        url: "api/Consecutivos/AgregarConsecutivo",
-        data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response.msg);
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
-        }
-    });
-}
-
-function ModificarConsecutivo(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final) {
-    $.ajax({
-        type: "post",
-        url: "api/Consecutivos/ModificarConsecutivo",
-        data: JSON.stringify({ Prefijo: Prefijo, Descripcion: Descripcion, CODIGO_CONSECUTIVO: CODIGO_CONSECUTIVO, Rango_Inicial: Rango_Inicial, Rango_Final: Rango_Final }),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (response) {
-            console.log(response.msg)
-        },
-
-        error: function (response) {
-            console.log(response);
-            window.location.replace("error.html?error=" + response.status + "&men=Error_Agregando_Consecutivo");
-        }
-    });
-}
 
 function AgregarBitacora(Prefijo, Descripcion, CODIGO_CONSECUTIVO, Rango_Inicial, Rango_Final, Tipo) {
     var Codigo_Registro = Prefijo;

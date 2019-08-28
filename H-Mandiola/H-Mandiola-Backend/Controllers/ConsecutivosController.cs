@@ -90,9 +90,8 @@ namespace H_Mandiola_Backend
             }
             else
             {
-                return Json(new { msg = "Error " + value.Prefijo.ToString() });
+                return InternalServerError();
             }
-            //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
 
         }
 
@@ -111,7 +110,7 @@ namespace H_Mandiola_Backend
             }
             else
             {
-                return Json(new { msg = "1", numero_error = objConsecutivos.num_error, mensaje_error = objConsecutivos.mensaje });
+                return InternalServerError();
             }
             //String res = "Exito la wea wn qliao los valores son "+value.Prefijo+" "+value.CODIGO_CONSECUTIVO;
             

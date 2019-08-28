@@ -118,7 +118,6 @@ namespace BLL
 
                 if (_num_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("https://localhost:44331/error.html?error=" + _num_error.ToString() + "&men=Error_Agregando_Consecutivos");
                     cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return false;
                 }
@@ -157,7 +156,6 @@ namespace BLL
 
                 if (_num_error != 0)
                 {
-                    HttpContext.Current.Response.Redirect("error.html?error=" + _num_error.ToString() + "&men=Error_Modificando_Consecutivos");
                     cls_DAL.desconectar(conexion, ref _mensaje, ref _num_error);
                     return false;
                 }
