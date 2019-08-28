@@ -46,10 +46,6 @@
         });
     }
 
-    gapi.load('auth2', function () {
-        gapi.auth2.init();
-    });
-
 
     $('#btnAceptar').click(function (e) {
         e.preventDefault();
@@ -106,4 +102,10 @@ function signOut() {
         document.cookie = "username=;path=/";
         location.href = 'Home.html';
     }
+}
+
+window['gapiStart'] = function () {
+    gapi.load('auth2', function () {
+        gapi.auth2.init();
+    });
 }

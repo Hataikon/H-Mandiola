@@ -10,7 +10,7 @@
     <script src="Scripts/bootstrap.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <meta name="google-signin-client_id" content="1072392383551-29kdof31c9s5uv1q386r3qcs58digbl7.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=gapiStart" async defer></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         <li><a href="Reservacion_Npagadas.html">Reserve y pague despues aqui</a></li>
         <li><a href="Compra_Articulos.html">Compras adicionales</a></li>
         <li><a href="Ajustes_Cuenta.html">Ajustes de Ajustes_Cuenta</a></li>
-        <li><a href="Home.html">Cerrar Sesion</a></li>
+        <li class="float-right bg-light"><a class="active" onclick="signOut()">Cerrar Sesion</a></li>
     </ul>
     <form class="form-horizontal">
         <fieldset>

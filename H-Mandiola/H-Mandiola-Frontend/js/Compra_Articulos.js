@@ -1,7 +1,4 @@
 ﻿$(document).ready(function () {
-    gapi.load('auth2', function () {
-        gapi.auth2.init();
-    });
 });
 
 function getCookie(name) {
@@ -22,4 +19,10 @@ function signOut() {
         document.cookie = "username=;path=/";
         location.href = 'Home.html';
     }
+}
+
+window['gapiStart'] = function () {
+    gapi.load('auth2', function () {
+        gapi.auth2.init();
+    });
 }

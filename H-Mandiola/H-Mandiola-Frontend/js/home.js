@@ -55,11 +55,13 @@
         $('#navBar').append('<li><a href="Registro.html">Registrarse</a></li>');
     }
 
+});
+
+window['gapiStart'] = function () {
     gapi.load('auth2', function () {
         gapi.auth2.init();
     });
-
-});
+}
 
 function getCookie(name) {
     var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
